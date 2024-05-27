@@ -1,0 +1,16 @@
+---
+- name: create logger job
+  hosts: all
+  become: true
+
+  tasks:
+  - name: create logger job
+    cron:
+      name: loggerjob
+      minute: "*/2"
+      hour: "*"
+      day: "*"
+      month: "*"
+      weekday: "*"
+      user: root
+      job: "/usr/bin/logger First_Log"

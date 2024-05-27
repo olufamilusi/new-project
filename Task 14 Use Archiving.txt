@@ -1,0 +1,23 @@
+Task 14: Use Archiving
+Create a playbook /home/automation/plays/archive.yml that runs on hosts in the database host group and does the following:
+o	A file /mnt/mysql_backups/database_list.txt is created that contains the following line: dev,test,qa,prod.
+o	A gzip archive of the file /mnt/mysql_backups/database_list.txt is created and stored in /mnt/mysql_backups/archive.gz.
+
+---
+- name: task 14
+  hosts: database
+  become: true
+
+  tasks:
+    - name: create database list file
+      copy:
+        content: "dev,test,qa,prod"
+        dest: /mnt/mysql_backups/database_list.txt
+
+    - name: archive file
+      archive:
+        path: /mnt/mysql_backups/database_list.txt
+        dest: /mnt/mysql_backups/archive.gz
+        format: "gz"
+
+

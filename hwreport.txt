@@ -1,0 +1,5 @@
+my_sys=
+my_BIOS=
+my_MEMORY=
+my_sda=
+my_sdb=

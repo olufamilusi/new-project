@@ -1,0 +1,30 @@
+HOW TO REBOOT WITH CRON AND GIVE A REBOOT MESSAGE WITH LINEINFILE MODULE
+---
+- name: Boot process
+  hosts: client2
+  tasks:
+  - name: managing boot process
+    lineinfile:
+      create: true
+      state: present
+      path: /tmp/rebooted
+      insertafter: EOF
+      line: rebooted at {{ ansible_facts['date_time']['time'] }}:{{ ansible_facts['date_time']['second'] }}
+
+
+  - name: run a cron job on reboot
+    cron:
+      name: "run on reboot"
+      state: present
+      special_time: reboot
+      job: "echo rebooted at $(date) >> /tmp/rebooted"
+
+  - name: reboot managed host
+    reboot:
+      msg: reboot initiated by Ansible
+      test_command: whoami
+
+  - name: show reboot success
+    debug:
+      msg: just rebooted succesfully
+

@@ -1,0 +1,23 @@
+---
+- name: add repos
+  hosts: all
+  become: true
+
+  tasks:
+  - name: add BaseOS repo
+    yum_repository:
+      name: BaseOS
+      description: "CentOS8 BaseOS"
+      baseurl: http://rhgls.example.local/repo/BaseOS/
+      gpgcheck: yes
+      gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+      enabled: yes
+
+  - name: add App Stream
+    yum_repository:
+      name: AppStream
+      description: "CentOS8 AppStream"
+      baseurl: http://rhgls.example.local/repo/AppStream/
+      gpgcheck: yes
+      gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+      enabled: yes

@@ -1,0 +1,35 @@
+---
+- name: create users and groups
+  hosts: all
+  become: true
+  gather_facts: true
+  vars_files:
+    - vault.yml
+    - user_list.yml
+
+  tasks:
+  - name: create devops group on dev and test hosts
+    group:
+      name: devops
+    when: (inventory_hostname in groups['dev'] or inventory_hostname in groups['test'])
+  
+  - name: create opsmgr group on prod hosts
+    group:
+      name: opsmgr
+    when: inventory_hostname in groups['prod']
+
+  - name: create users and dev and test hosts
+    user:
+      name: "{{item.name}}"
+      groups: devops
+      password: "{{dev_pass | password_hash('sha512')}}"
+    when: (inventory_hostname in groups['dev'] or inventory_hostname in groups['test']) and item.job == "developer"
+    loop: "{{user}}"
+
+  - name: create users on prod hosts
+    user:
+      name: "{{item.name}}"
+      groups: opsmgr
+      password: "{{mgr_pass | password_hash('sha512')}}"
+    when: inventory_hostname in groups['prod'] and item.job == "manager"
+    loop: "{{user}}"

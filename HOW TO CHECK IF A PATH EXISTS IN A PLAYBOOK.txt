@@ -1,0 +1,17 @@
+HOW TO CHECK IF A PATH EXISTS IN A PLAYBOOK
+
+---
+- name: check file existence
+  hosts: all
+  become: yes
+
+  tasks:
+  -  name: check to see if path exists
+     stat:
+        path: /root/details.txt
+    register: result
+
+  - name: Print a debug message
+    debug:
+        var: result.stat.exists
+

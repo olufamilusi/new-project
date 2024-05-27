@@ -1,0 +1,39 @@
+7 common data center migration challenges to avoid
+Admins should consider seven common data center migration challenges upfront to save money, prevent data loss and avoid delays during the migration process.
+•	
+•	
+•	
+•	
+•	
+ 
+By
+•	Devin Partida, ReHack.com
+Published: 18 Sep 2023
+Data center migration can be challenging, but proper planning can prevent some issues and pitfalls. Organizations should be aware of the most common problems in data center migration to avoid excess cost, delays and potential data loss.
+With plenty of planning, a practice run and careful execution, any organization can successfully migrate its data center. Consider the following seven challenges to plan around and prevent issues during the migration process.
+1. Lack of planning for all infrastructure and scheduling
+Infrastructure issues are one of the most common challenges data center teams encounter during migration. These can vary from one migration to another, but they often have to do with a lack of planning for the entire data center infrastructure, including hardware, operating systems, apps, security protocols and networking equipment.
+Setting up a new data center environment relies on a comprehensive understanding of the existing infrastructure. Establish this knowledge during the first stage of a data center migration, known as the discovery phase.
+It may be tempting to breeze over this step, but that leaves the door open for bits of infrastructure to fall through the cracks. When teams try to conduct the migration, they may find an application or security program isn't working properly, or they didn't provision their new environment correctly. Something was clearly left out, but the error is now more costly and time consuming.
+2. Skipping a rehearsal migration
+Data center migrations are complex processes that can be extremely sensitive to mistakes. So, it's important to practice or simulate the migration beforehand. Practicing ensures everyone involved understands their job and helps highlight potential issues. For instance, uncovering forgotten infrastructure elements during a rehearsal migration is much better than finding them during the real deal.
+Rehearsal migrations can be conducted in various ways, including through software programs, digital twins or even in a meeting room on whiteboards. The vital part is walking through every step with everyone on the migration team. A rehearsal will iron out any potential issues with the process and build everyone's confidence, reducing stress-related risks for the actual migration.
+3. Failure to back up data before the move
+Backing up all the data before beginning the data center migration is critical. Ideally, the migration goes smoothly and everything works as planned. This is never a guarantee, however, so securing copies of all the data is crucial in case anything goes wrong.
+Data can be backed up in several ways, such as in the cloud or on isolated on-premises servers that won't be involved in the migration. The cloud may be the easiest option for most organizations because data center teams can ask their cloud provider for backup storage before migrating.
+Also, double check the tenant copy of the service-level agreement if working with on-premises servers. If data is lost during the migration due to a chronic or catastrophic failure on the part of the data center owner or landlord, tenants may at least be able to terminate their lease. While a backup would still be necessary to recover lost data, a policy like this offers data center tenants the opportunity to move to a new facility without additional charges.
+4. Lack of unplanned downtime prevention
+Downtime is a common part of data center migration. It only becomes a significant issue when migration teams fail to plan for and prevent it as much as possible. Unplanned downtime typically occurs when something goes wrong in the migration process. It is usually tied to unforeseen technical issues and implemented to minimize the damage.
+As a result, preventing unplanned downtime often relies on precise migration planning. Carefully map and document the existing infrastructure and complete a rehearsal migration to help avoid errors and accidents.
+5. Failure to plan for high server latency
+Latency can throttle data migration schedules, dragging out wait times while files slowly transfer into the new environment. This is especially true for organizations migrating to or from the cloud. While migrating to cloud servers comes with many benefits, low latency is only an occasional benefit.
+Depending on how an organization's cloud servers are set up, latency can get quite high -- particularly if bandwidth is limited. It may not be possible to prevent unpredictable increases in latency, but organizations can plan for it. Leave some extra time and room in the migration schedule to account for any instances of high latency along the way.
+6. Poor fiscal and financial planning
+In addition to planning for time-related setbacks, organizations also need to plan for extra expenses that may come up during data center migration. Without careful financial planning, they may find costs spinning out of control during the migration if something goes wrong technically.
+Several factors can cause unexpected costs during data center migration whether to the cloud or on premises, including data accumulation, high latency causing slow data transfers, and various errors and technical issues. It may only sometimes be possible to prevent incidents that incur excess costs during migration, but businesses can plan ahead. Set aside some extra money in the financial planning stage to cover any incidents that come up.
+7. Over- or under-provisioning the new environment
+Sometimes issues in the data center migration process arise in the new environment rather than the old one. When it comes to provisioning, over- or under-provisioning the new environment can be common. The organization may have extra space for new data when the new servers are over-provisioned.  Organizations may be paying for more storage than needed.
+Under-provisioning is more likely to cause issues in the migration process. The migration team will usually notice this happening when it runs low on space before the data transfer is finished. Poor provisioning is usually the result of inadequate planning or an error during setup for the new environment.
+Run a smooth data center migration
+Moving to a new data center or the cloud has many possible pitfalls. But with plenty of planning, a practice run and careful execution, any organization can successfully migrate.
+

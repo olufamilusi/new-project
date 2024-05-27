@@ -1,0 +1,37 @@
+Commands to add centos 8 to windows domain
+
+nano /etc/resolv.conf
+
+
+
+
+realm join --user=administrator example.local
+
+realm list
+
+
+
+id administrator@example.com
+nano / etc/sssd/sssd.conf
+
+	
+
+systemctl restart sssd
+
+
+id administrator
+
+
+ 
+legend
+
+everything in red : will be different for you
+everything in blue : things that you will need to change depending on your situation
+
+add what is in this box to the top of the opened file (don’t copy -------------- rest of file)
+
+replace what’s is in the left box with what’s in the right box
+
+	
+
+if the box is empty then the command will not give any output if it is executed correctly 

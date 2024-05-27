@@ -1,0 +1,259 @@
+
+
+
+
+	 v20:55 (il y a 5 jours)		 
+
+
+	
+
+Désa 
+
+         Final Class Real life Interview Questions
+
+
+1-boot process; boot config file
+1-Boot process: there’s 4 phases in the boot process:
+ A-Firmware phase:  Bios run the post (power on self-test) to initialize the system hardware then discover the MBR (master boot record)which load the boot loader phase.
+B-Boot loader phase: the grub takes the kernel from the /boot then decompress it and place it in to the memory based configuration file /boot/grub2/grub.cfg then load the kernel phase.
+C-kernel phase: the kernel load required drivers from the initrd.img and start the first process (systemd) rhel 7/8   or (initd) rhel6 
+D-initialization phase: system takes control of the kernel and enable all the services then start the runlevel.
+-	
+ 2-difference between rhel6/7/8
+
+ 
+   Selinux is a Linux kernel security module that provides a support access control policies.
+     It has 3 modes:enforcing ,permissive and disabled 
+
+4-how do you build a webserver? do you have experience on building web-server
+-	Download the package 
+-	Start and enable the service 
+-	Edit the /var/www/html/index.txt file
+-	If firewall and selinux are enabled add the service and the port to the firewall level.
+-	Restart the service 
+-	Try to access the webserver using the curl command or using the ip on  a browser to verify.
+
+5-how do you harden your system
+
+To harden my system I  will need to:
+-secure user accounts : put  strong user id ,set password to expire, increase the length of the password ,increase the complexity of the password(/etc/security/pwquality.conf )rhel 7/8 (etc/pam.d/passwd.auth) rhel 6.
+-disable the user root remotely login 
+-remove unwanted packages
+-Stop unused services
+-Check on listening ports
+-secure ssh configuration by maping shh login to a different port.
+-enable firewall (iptables, firewalld)
+-Enable   SElinux
+-change listening services port numbers
+-keep the OS up to date 
+
+7-OSI model
+It is the framework that implement the network under different layers
+It has 7 layers.
+ 
+8-how do you build ntp client To build an ntp client I need to:
+-install the package: ntp or chrony 
+-enable and start the service
+- edit the /etc/chrony.conf or the /etc/ntp.conf and add the stratum 
+-restart the service 
+Note :you can verify by using “chronyc sources” command 
+
+
+
+9-how do you increase system performance
+
+To increase system performance , I will need to use tuned tool or manage system process
+-tuned is a system used to increase  performance
+It has different profiles and you should activate the profile that match your server.
+-	Second I will need to  manage the processes running on the server by nicing or renicing processes .
+-	Nice value will decrease the priority of a process 
+-	Decreasing the swap value will increase the system  performance.
+
+10-patching process
+A-	Prepatching :
+-create a change 
+-send communication 
+-server version (physical or virtual)
+-backup the config files (/etc/fstab,  /etc/sysconfig/network ,/etc/resolv.conf)
+-check if /var have at least 50% of space 
+-check the runlevel (3 is default)
+-make sure repo is available 
+-take snapshot of the server 
+-blackout the server(maintenance mode)
+                B-Implementing the patch :
+                          -use ansible playbooks wrote by by engineers to patch 
+Or
+                         -use adhoc command with yum update to patch the server 
+                 -Reboot the system 
+               C -post patching:
+                             -Make sure all the config files are ok 
+                             -check runlevel
+                             - send communication 
+
+
+11-how do you create a logical fs from a rawdisk
+---create a partition from the raw disk
+ -then create physical volumes(pv) from the partitions 
+-combine the physical volumes(pv) to create a volume group(vg)
+-then slice the volume group to form logical volume (lv)
+-Format and permanently mount the lv in /etc/fstab .
+
+12-how do you build nfs client
+-	To build an nfs client  ,I will need to install ,start,enable nfs
+-	Put the informations in the /etc/export of the host server
+-	Create the mount point
+-	Mount the share 
+-	Mount permanently (/etc/fstab)
+-	Mount -a 
+ 
+
+
+13-boot process
+14-how do you check if server is virtual/physical
+
+-I will use the dmidecode -t system command
+
+15-what is ssh config file and http
+
+-	The ssh config file is /etc/ssh/sshd_config
+-	The http config file is /etc/httpd/conf/httpd.conf
+16-how do you bootstrap
+-	To bootstrap the server I will neeed:
+-	-To install the url katello agent
+-	-use the key based on the environment 
+-	-after registration, I attach a subscription to a registered server
+
+17-what is runlevel 
+Runlevel is operation state that is preset in linux .runlevels are numbered 
+from 0 to 6 and determine which program can execute when the server boots up.
+-runlevel 0 = halt
+-runlevel 1 = maintenance mode
+-runlevel 2 = single user mode
+-runlevel 3= multi user mode with networking but no gui
+-runlevel 4= not applicabe
+-runlevel 5=multi user mode with networking and gui
+-runlevel 6= reboot
+ 
+
+18-how do you display a kernel version
+Uname -a
+
+19-differences between R6/R7/R8
+
+
+20-tell me about the boot process?
+21-what is hugepage; swapiness?
+-hugepage is a future integrated into the linux kernel that makes possible for the operating system to support memory pages greater than the default .
+
+-swapiness is the the process where the swap takes over the ram when the ram is not sufficient. 
+
+22-what is boot config file in rh6
+/boot/grub/grub.conf
+23-how to break a rootpasswd?
+To break the root passwd I will:
+-Interrupts the boot process by typing on any key 
+-then press the E key to get to another command line 
+-then edit the linux line and add rd.break  at the end of the line and hit ctrl+x buttons to get to the interface where you will mount the root filesystem and give it the necessary permission: mount -o remount,rw /sysroot
+Chroot /sysroot
+Then add the password and create the /.autorelabel file to reload SELINUX modules.
+24-How to register server to satellite == bootstrap ?
+To bootstrap the server,I will need to :
+-install the url kattelo agent
+-use the key based on the environnement
+-then on the registered server, add a subscription.
+what is the difference between TCP/IP and OSI/model?
+-tcp/ip is the optimized version of the osi model
+25-what is DNS?
+26-what is A-record; c-record; reverse-record , alias
+27-what command you use to see dns server?
+#Cat /etc/resolv.conf
+28-what is network bonding or teaming?
+#the network bonding is the processe to put together two or more interfaces in order to gain more bandwich,speed or security. 
+29-how to capture a network?
+tcpdump
+
+30-How to deploy a server to a network // how to set an ip to a server?
+#i will use the nmcli command or edit the /etc/sysconfig/network-scripts/ifcfg- file. 
+60-what is the difference between switch and router
+Switch establish connection between computers into a (lan) network and router establish connection between (lans) networks.
+31-how to check MAC addr associated to your ip?
+#Arp -a
+32-how to check the gateway?
+#Ip route	
+33-how to display the routing table?
+#Route -n
+34-how to set-hostname?
+#Hostnamectl set-hostname ….
+35-what is the user config file
+/etc/passwd
+36-what is the passwd config file
+/etc/shadow
+37-Hardlinks and soft link
+-Hardlinks are cloun of the original file,it has the same inode and will not be damaged when the original file is deleted.
+-softlinks are shurtcuts of the original file ,have different inode and will be damaged if the original file is deleted.
+
+38-display kernel
+Uname -a
+39-display what user are doing
+$w
+40-display all users that are login 
+$who
+41-What is a VMware and what is your experience in VMware?
+42-How do you add resources in VMware?
+43-How do you harden your system? 
+
+44-what is the ticketing tool you use?
+ -Service-now
+44-what is the monitoring tool & bakup you use?
+-Monitoring tool =Nagios
+-backup tool =rsync
+45-What are the different parameters you monitor?
+--cpu load average
+--user time 
+--memory utilization
+--disk utilization
+--network resource utilization
+
+46-how many people you have in yr team?
+-	people
+47-what kind of project did you work on?
+-Implementation of LVM for disk management.
+48-how do you see yrself in 5 years?
+-as a system ingenieer
+49-Tell me about yourself?
+My name is Thierno balde ,  .
+in the past few years I’ve been working for several companies where I acquired a lot of experience .
+I have experience in the linux systems administration  as configuring samba servers to map and share it to a windows 8 server.
+I have experience of managing users ,creating and assigning permissions.
+I have experience managing servers storage by adding disks and performing lvm creation.
+I have experience on troubleshooting outcoming issue and perform patching.
+Outside of  work I keep myself productive  by self studying and keeping on track of new technologies.
+I’m very committed and a good team player. I love challenges and seek for new ones. 
+
+50-how big is yr environment?
+-Around 150 employes
+
+51-what is the port number of mysql ,ldap , nfs?
+-Mysql=3306
+-ldap=389
+-nfs =2049
+52-How do you build a server?
+53-What is the difference between rpm and yum?
+-rpm install packages
+-yum download and install packages
+
+54-how do you shrink the fs?
+To shrink a fs :I will:
+-unmount the fs
+-reduce the fs using lvreduce
+-and remount the fs 
+55-what is yr experience with ansible?
+I have experience working with ansible which is an automation tool .
+ It’s a tool that is very useful when you work on a big environnement(lot of servers)
+57-how do you set up an nfs clients?
+58-tell me about the patching process?
+59-whatis yr experience with RD satellite?
+interviewwww Questions summary.txt
+Ouvrir avec
+Affichage de interviewwww Questions summary.txt en cours...
+

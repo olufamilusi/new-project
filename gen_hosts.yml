@@ -1,0 +1,13 @@
+---
+- name: collect all hosts on dev hosts
+  hosts: all
+  become: true
+  
+  tasks:
+  - name: use template
+    template:
+      src: hosts.j2
+      dest: /etc/myhosts
+    when: ('dev' in group_names)
+
+

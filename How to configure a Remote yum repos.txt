@@ -1,0 +1,12 @@
+How to configure a Remote yum repository in CLI
+===============================================
+1.
+
+# cat /etc/yum.conf (yum config file)
+Install httpd package
+# yum install httpd (on server that is used as remote repo)
+Start and enable the service
+
+2.
+
+# cd /var/www/html (And copy the files from the repo earlier mounted to a directory in your server to this directory. I created a directory on a local repo /dvd-repo and mounted the iso files to the directory. Now we are going to copy the contents of that directory with iso files to this directory 

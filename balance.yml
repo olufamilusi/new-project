@@ -1,0 +1,12 @@
+---
+- name: use php hello role
+  hosts: webservers
+  become: true
+  roles:
+    - phphello
+
+- name: use balancer role
+  hosts: balancers
+  become: true
+  roles:
+    - balancer

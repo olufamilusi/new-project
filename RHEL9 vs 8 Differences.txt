@@ -1,0 +1,86 @@
+RHEL9 v/s 8 Differences
+This page would list out the major differences between RHEL 9 and 8 variants and key features in RHEL 9. Though the default file system remains same the kernel version is much improved and with many changes. RHEL9 is the first enterprise release from Red Hat build from CentOS Stream which served as the upstream version.
+ 
+Features	RHEL 9	RHEL 8
+Default File System	XFS	XFS
+Kernel Version	5.14.0-x	4.18.0-x
+Kernel Code Name	Plow	Ootpa
+General Availability Date of First Major Release*	2022-05-17 (Kernel Version: 5.14.0-70.13.1)	2019-05-07 (Kernel Version 4.18.0-80)
+Desktop GUI and Graphics	"Wayland" is still the default display server with GNOME being updated to 40. The X.org has been deprecated.
+
+Wayland 1.191	The default display server is ‘Wayland’ used by Gnome Display Manager in RHEL 8.
+
+Wayland 1.15
+Supported Hardware Architecture	
+- AMD and Intel 64-bit architectures (x86-64-v2)
+- The 64-bit ARM architecture (ARMv8.0-A)
+- IBM Power Systems, Little Endian (POWER9)
+- 64-bit IBM Z (z14)	- AMD and Intel 64-bit architectures
+- The 64-bit ARM architecture
+- IBM Power Systems, Little Endian
+- IBM Z
+Maximum Logical CPUs Supported (on x86_64 arch)	1792 [8192]	768 [8192]
+Maximum Memory (RAM) Supported (on x86_64 arch)	48TB [64TB]	24TB [64TB]
+Compiler/toolchain	GCC 11.2.1	GCC 8.2.1
+Changes in Secure Copy Protocol (SCP)	SCP is deprecated in RHEL 9. SCP is replaced by the SSH File Transfer Protocol (SFTP) by default.	This was earlier managed by the SCP command which was from OpenSSH suite.
+Changes on how network configuration files being structured.	In RHEL9, the NetworkManager stores new network configurations to '/etc/NetworkManager/system-connections/'
+in a key-file format.
+
+Now, the configuration files would in the format as shown in this example: enp0s3-nmconnection	NetworkManager stores new network configurations to '/etc/sysconfig/network-scripts/' directory in the ifcfg-xxxx format.
+Browser Versions (Firefox)	Firefox 91.8.0	Firefox 60.5.11
+Change in boot configuration files	Configuration files for the GRUB boot loader are now stored in the /boot/grub2/ directory on all supported CPU architectures.
+
+The /boot/efi/EFI/redhat/grub.cfg file, which GRUB previously used on UEFI systems, is now a symbolic link to the /boot/grub2/grub.cfg file. This simplifies user experience as you can boot the same installation with either EFI or legacy BIOS.	For UEFI systems the configuration file is /boot/efi/EFI/redhat/grub.cfg compared to the /boot/grub2/grub.cfg BIOS based setups.
+Changes in network teams	The teamd service and the libteam library are deprecated in Red Hat Enterprise Linux 9 and will be removed in the next major release. As a replacement, configure a bond instead of a network team.	Both the bonding and teaming options are available.
+Default Databases	The following database servers are available in RHEL9*
+
+- MySQL 8.0
+- MariaDB 10.5
+- PostgreSQL 13
+- Redis 6.2	The following database servers are available in RHEL8*:
+
+- MySQL 8.0
+- MariaDB 10.3
+- PostgreSQL 10 and PostgreSQL 9.6
+- Redis 5.0
+		
+		
+		
+RHEL9 Extras
+Stronger OpenSSL Framework	OpenSSL is now provided in version 3.0.1, which adds a provider concept, a new versioning scheme, an improved HTTP(S) client, support for new protocols, formats, and algorithms, and many other improvements.
+Improved OpenSSH	OpenSSH is distributed in version 8.7p1, which provides many enhancements, bug fixes, and security improvements as compared to version 8.0p1, which is distributed in RHEL 8.5. The SFTP protocol replaces the previously used SCP/RCP protocol in OpenSSH.
+In-Place Upgrade Support	In-place upgrade from RHEL 8.6 to RHEL 9.0 on the following architectures are supported:
+
+- 64-bit Intel
+- 64-bit AMD
+- 64-bit ARM
+- IBM POWER 9 (little endian)
+- IBM Z architectures, excluding z13
+
+It is not possible to perform an in-place upgrade directly from RHEL 7 to RHEL 9. However, an in-place upgrade from RHEL 7 to RHEL 8 and then a second in-place upgrade to RHEL 9 is recommended and supported.
+New options to Lock root account and Allow root SSH login with password	The option to lock root account and allow SSH root login via password has been added in the initial deployment screen.
+Post installation configurations are disabled	Previously, RHEL users were configuring Licensing, System (Subscription manager), and User Settings prior to gnome-initial-setup and login screens. With this update, the initial setup screens have been disabled by default to improve user experience.
+OpenShift fencing agent	The fence_kubevirt fencing agent is now available for use with RHEL High Availability on Red Hat OpenShift Virtualization.
+Python in RHEL 9	The default version of Python is 3.9 which is distributed in a non-modular Python3 RPM package which is available in the BaseOS repository.
+Java implementations in RHEL 9	The RHEL 9 AppStream repository includes and supports 3 versions of OpenJDK as shown below:
+
+- OpenJDK 17 Java Runtime Environment and the OpenJDK 17 Java Software Development Kit.
+- OpenJDK 11 Java Runtime Environment and the OpenJDK 11 Java Software Development Kit.
+- OpenJDK 8 Java Runtime Environment and the OpenJDK 8 Java Software Development Kit.
+Stable Kdump interface	kdump no longer crashes due to SELinux permissions.
+
+The kdump crash recovery service requires additional SELinux permissions to start correctly. In previous versions, therefore, SELinux prevented kdump from working, kdump reported that it is not operational, and Access Vector Cache (AVC) denials were audited. In this version, the required permissions were added to selinux-policy and as a result, kdump works correctly and no AVC denial is audited.
+device-mapper-multipath is of 0.8.7 version with many improvements	The device-mapper-multipath package has been upgraded to version 0.8.7, which provides multiple bug fixes and enhancements. Important changes are:
+
+- Memory leaks in the multipath and kpartx commands has been fixed.
+- Fixed repeated trigger errors from the multipathd.socket unit file.
+- Improved autoconfiguration of more devices, such as DELL SC Series arrays, EMC Invista and Symmetrix arrays (among others).
+WireGuard VPN is available as Technology Preview component	WireGuard is an unsupported and available as Technology Preview component. It is a high-performance VPN solution that runs in the Linux kernel. It uses modern cryptography and is easier to configure than other VPN solutions. Additionally, the small code-basis of WireGuard reduces the surface for attacks and, therefore, improves the security.
+Stratis is in Technology Preview stage	It is the local storage manager framework which facilities management of pool of storage devices and automatic growth of the underlying file systems as needed. This is also available in RHEL web console which is popularly called as "Cockpit".
+The virt-manager and libvirt got deprecated	By default, virtual machines could be managed using Cockpit. The monolithic libvirt daemon, libvirtd, has been deprecated in RHEL 9, and will be removed in a future major release of RHEL.
+Native NVMe Multipathing enabled by default	By default, Native NVMe multipathing is enabled in RHEL 9.
+
+Using Device Mapper Multipath with the NVMe-TCP driver can result in the Call Trace warnings and system instability. To work around this problem, NVMe/TCP users must enable native NVMe multipathing and not use the device-mapper-multipath tools with NVMe.
+Installing on legacy BIOS based VGA systems	When installing RHEL9 on BIOS based VGA graphics based systems, the installer might not show the display. It happen when UEFI is switched to legacy mode. The workaround for this is to boot the system using "nomodeset" option.
+SHA-1 is deprecated for cryptographic purposes	The usage of the SHA-1 message digest for cryptographic purposes has been deprecated in RHEL 9.
+

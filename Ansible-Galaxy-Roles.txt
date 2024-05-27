@@ -1,0 +1,54 @@
+Task 7:
+- Giving the userslist.yml file with the following content:
+1.	users:
+2.	- username: mark
+3.	  job: developer
+4.	- username: Dan
+5.	  job: manager
+6.	- username: Bill
+7.	  job: developer
+8.	- username: Lisa
+9.	  job: Tester
+- Using lock.yml from task 7 and userslist.yml files Create a playbook users.yml that runs on prod, dev and qual environments to create users as the following:
+  o If user’s job is developer add user to dev and qual environments, with password refers to variable dev_pass from lock.yml. user should be a member of supplementary group devops
+  o If user’s job is manager add user to prod environment with password refers to variable mgr_pass from lock.yml and user should be a member of supplementary group mgrops.
+
+---
+- name: create new users
+  hosts: all
+  vars_files:
+  - userslist.yml
+  - lock.yml
+  tasks:
+  - name: creating new group
+    group:
+      name: devops
+    when: inventory_hostname in groups['dev'] or inventory_hostname in groups['qual']
+
+  - name: create another group
+    group:
+      name: mgroup
+    when: inventory_hostname in groups['prod']
+
+  - name: add new users
+    user:
+      name: "{{ item.username }}"
+      password: "{{ dev_pass | password_hash('sha512') }}"
+      groups: devops
+    when:
+      - item.job == 'developer'
+      - inventory_hostname in groups['dev'] or inventory_hostname in groups['qual']
+    loop: "{{ users }}"
+
+
+  - name: add another user
+    user:
+      name: "{{ item.username }}"
+      password: "{{ mgr_pass | password_hash('sha512') }}"
+      groups: mgroup
+    when:
+      - inventory_hostname in groups['prod']
+      - item.job == 'manager'
+    loop: "{{ users }}"
+
+

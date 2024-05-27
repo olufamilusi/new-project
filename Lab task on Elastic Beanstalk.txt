@@ -1,0 +1,70 @@
+====================
+Elastic Beanstack
+====================
+
+=> End to end web application management service
+
+		Ex: Java, .Net, Python, PHP, Node JS
+
+=> It provides platform as a service (PaaS)
+
+=> AWS will provide ready made platform to run our application when we go for Beanstack
+
+==============================
+Web App - Deployment process
+==============================
+
+1) Create Network (VPC)
+
+2) Create Security Groups
+
+3) Enable Inbound Rules
+
+4) Create EC2 Instances
+
+5) Install Required Softwares to run the code 
+
+	Ex : Java, Tomcat, IIS
+
+6) Create Load Balancer
+
+7) Setup Auto Scaling Group for High Availability
+
+8) Deploy our application code
+
+
+### Note: When we use AWS Elastic Bean stack services then first 7 steps will be taken by Elastic Bean stack. We are responsible for only application deployment.
+
+==================
+Elastic Beanstack
+==================
+
+=> No specific price for Elastic Bean
+
+Note: Price is applicable for the resources created by Elastic Beanstack.
+
+		Ex: Ec2 instances, LBR, ASG ...
+
+
+
+
+
+
+
+
+
+
+
+================================
+Lab Task on Elastic Beanstack 
+================================
+
+1) Create IAM Role with below 3 policies
+
+		- AWSElasticBeanstalkMulticontainerDocker
+		- AWSElasticBeanstalkWebTier
+		- AWSElasticBeanstalkWorkerTier
+
+2) Create Application using Beanstack
+
+3) Create Environment for the application by choosing required Runtime.

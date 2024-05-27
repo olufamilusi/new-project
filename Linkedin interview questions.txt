@@ -1,0 +1,148 @@
+Sysfs is a pseudo file system provided by the Linux Kernel that exports info about kernel subsystems, hardware devices, and associated device drivers from the kernel device model to user space through virtual files. 
+Lsblk: This will list information about block devices. It reads the sysfs to gather information. 
+-	a: empty devices
+-	b: size info in byte
+-	z: print zone model for devices
+-	d: skip slave entries.
+-	m: print info about device owner, group, and mode of block devices.
+-	-l: list devices in a list format.
+  
+
+1.	QUESTION: You add an additional hard drive to your physical machine but can’t find it when you log in to your linux system. What do you do?
+Run the lsblk command to display the different block devices in the system. If can’t find it, the issue may be that the hard disk was not properly added. 
+2.	QUESTION: You create a partition but can’t find it, what do you do? I’ll use partprobe command. It is used to update the kernel partition table without requiring a system reboot. 
+
+3.	QUESTION: What are the 3 layers of LVM: Physical volume, Volume group, Logical volume. 
+
+
+4.	QUESTION: What are the advantages of using LVM?
+LVM is a storage management tool that is used to convert a physical device to a physical volume. You create a new Physical Volume (PV) from the physical storage. Add the PV to the Volume Group (VG) and then extend the Logical Volume (LV). Here are some of its ++:
+
+-	 Dynamic volume resizing:  Logical Volume Manager (LVM) technology allows you to manage and resize logical volumes dynamically while they are still in use.
+-	lvextend -l +100%FREE /dev/YourVolumeGroup/YourLogicalVolume
+-	Allow you to take snapshots. 
+-	Easy of management: LVM simplifies disk management by abstracting away physical details. You work with logical volume instead of physical partitions or disks.
+-	Flexibility: LVM offers great flexibility in terms of moving and resizing lvs between physical disks and partitions
+-	Data migration, data backup and recovery.
+-	 Multi-platform support, and more. 
+
+5.	QUESTION: You are asked to unmount a specific logical volume in a system. When you use the umount command, you receive an error that there is a file currently being used. What do you do? 
+-	I will use the lsof (list open files) command to identify the processes using that file or directory. 
+-	Lsof +D /dev/sdb or fuser -mv /dev/sdb. 
+-	Then with sudo kill -9 PID, I will kill the process. 
+
+ Lsof will display all the files that are being used including the user, PID, and more. An open file may be a regular file, a directory, a block special file, a character, etc.
+-	 lsof /run: to know what process is using the /run dir. 
+-	Lsof -i: Display files associated with Internet connection and ports.
+-	Lsof -i tcp :22
+-	Lsof /var/log/kern.log: See processes that have opened a file (will provide infos about that file).
+-	Lsof -u admin: to display the files admin has opened. 
+-	Lsof -p 890: to see how many files the process has opened. 
+-	-D search all opened files 
+   
+
+5.1	QUESTION: Using the fuser command, you can identify all the processes using sockets. It will display the User, PID, ACCESS, and COMMAND. Then with option like -k (kill), I will kill a process. 
+ 
+-m allows you to specify the path of the file system. 
+-l list all signals
+-k kill a process
+-v verbose
+-i to kill a process interactively
+- fuser -mv /home/vlateu; fuser -k 345.
+6.	QUESTION: There is a droppage in the network, like all the packages are not being sent. What do you do?
+-	  I will use mtr (it is a network diagnostic tool used for real time monitoring of networks). It is like a combination of the ping and nslookup command that provides the status of package transfer between 2 devices. It displays package %loss, %sent; and ping %arg, %best, standard deviation, … Then depending of the result, I will implement changes. 
+
+7.	QUESTION: You receive a ticket that it takes long to write to a specific device. What do you do? 
+   - I’ll use the `iostat`, `iotop`, or `sar` to monitor disk I/O and identify any bottlenecks or high utilization.
+The iostat reports central processing unit (CPU) statistics and input/output statistics for devices and partitions. 
+iostat is a computer monitor tool used to collect and show OS storage input and output statistics. It’s used to identify performance issues with local disk or remote disk like NAS storage. 
+  
+If you receive a ticket or encounter an issue where it takes a long time to write to a specific device (e.g., sdb) in Linux, there are several steps you can take to diagnose and potentially resolve the problem. Here's a troubleshooting guide:
+1. Check Device Health and Availability:
+   - Verify that the device (sdb) is accessible and not experiencing hardware failures. Use the `lsblk` or `fdisk -l` command to list available block devices.
+   - Check the system logs (`dmesg` or `/var/log/messages`) for any hardware-related errors or warnings.
+2. Check Disk Space:
+   - Ensure that there is enough free space on the device to accommodate the data you are trying to write.
+
+3. Check Filesystem Health:
+   - Use the `fsck` command to check the filesystem on the device for errors. For example: `sudo fsck /dev/sdb1`.
+4. Check for I/O Bottlenecks:
+   - Use tools like `iostat`, `iotop`, or `sar` to monitor disk I/O and identify any bottlenecks or high utilization.
+7. Check for Large Writes:
+   - If you are writing a large amount of data, it may take time. Monitor the progress and verify if it's just a matter of the data size.
+8. Check for Running Processes:
+   - Identify if any processes are causing high disk I/O or contention on the same device. Use tools like `lsof` or `fuser` to find processes accessing the device.
+9. **Check for RAID or LVM Issues:
+   - If the device is part of a RAID array or LVM setup, investigate the health of the array or logical volume. Use `mdadm` for RAID or `lvdisplay` for LVM.
+
+12. **Monitor System Resources: *
+    - Keep an eye on CPU and memory usage. High CPU or memory usage can indirectly affect disk performance.
+13. **Update Drivers and Firmware: *
+    - Ensure that you are using the latest drivers and firmware for your storage hardware.
+14. **Consider Disk Replacement: *
+    - If you suspect a hardware issue and have ruled out software-related problems, consider replacing the disk.
+15. **Backup Data:
+    - Before making significant changes, ensure you have a backup of any critical data on the device.
+It's important to approach these troubleshooting steps carefully and document any changes or actions taken. Additionally, always prioritize data safety and backup before making significant changes to storage devices.
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+Abbbcddddddddddddddddddddddddddddddeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffffffffffffffffffffffffffffffffffffffff bghppppppppppppppppppppppppppppppppppppppppppppp 
+8.	QUESTION: What is your experience with extended permissions? I use ACL to assign extended permission to specific users or group over a component. 
+Setfacl -m u: root:rwx /home/vanick/textfile.
+Getfacl /home/vanick/textfile: to see the permission. 
+
+9.	QUESTION: What do you know about swap files? A swap space is a chunk of storage on the hard drive used to complement the RAM. Swapping is when the Linux kernel uses a hard disk space to store info from the RAM. 
+ 
+-	Swapon: to check swap space.
+-	Fallocate -l 1G /swapfile: To create a swap file. A swap file can be extended unlike a swap partition. The command preallocate or deallocate space to a file. -l stand for length.
+-	Chmod 600 /swapfile.
+-	Mkswap /swapfile: format the file to swap.
+-	Swapon /swapfile: enable/activate the swap. 
+-	Add it in the fstab for a permanent change.
+
+10.	QUESTION: How would you architecture a VM in ESXi? 
+11.	QUESTION: What is the difference between ext4 and xfs? 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Creating a virtual machine (VM) on VMware ESXi involves several steps, including configuring hardware settings, selecting an operating system, and installing it. Here's a general overview of how to architect a VM on ESXi:
+1. Access the ESXi Host:
+   - Ensure you have access to the VMware ESXi host using the vSphere Client or vCenter Server. You'll need administrative privileges to create VMs.
+2. Open the vSphere Client:
+   - Launch the vSphere Client and connect to your ESXi host.
+3. Create a New Virtual Machine:
+   - In the vSphere Client, select your ESXi host from the inventory.
+   - Click on the "Create / Register VM" option to create a new virtual machine.
+4. Select Configuration Options:
+   - Follow the wizard to configure the VM settings. Key options include:
+     - **Name and Location: * Give your VM a name and choose a folder to store it.
+     - **Compatibility: * Select the desired compatibility level.
+     - **Guest OS: ** Choose the operating system that you intend to install on the VM.
+     - **CPUs and Memory:** Specify the number of virtual CPUs and the amount of memory (RAM) allocated to the VM.
+     - **Network:** Assign network adapters and specify the network configuration.
+     - **Storage:** Select the datastores where the VM files will be stored. You can allocate a virtual disk and specify its size.
+5. **Customize Hardware Settings:
+   - You can further customize hardware settings, including adding additional hard disks, configuring advanced CPU options, enabling virtualization features, and more.
+6. Install an Operating System:
+   - Attach the installation ISO image of the operating system you want to install on the VM. This can be done in the "CD/DVD Drive" settings.
+   - Power on the VM, and it will boot from the ISO image.
+   - Follow the on-screen prompts to install the operating system on the VM. This process varies depending on the chosen OS.
+7. Complete OS Installation:
+   - Complete the installation by specifying language, time zone, root password, and other OS-specific settings.
+8. Install VMware Tools (Optional):
+   - After the OS installation, consider installing VMware Tools, which enhances VM performance and provides additional features like seamless mouse integration and time synchronization. VMware Tools is typically available for various guest OS types.
+9. Install and Configure Applications:
+   - Install and configure any applications and services needed on the VM according to your requirements.
+10. Customize VM Resources (Optional):
+    - You can adjust CPU, memory, and other hardware resources allocated to the VM as needed. VMware provides options for resizing virtual disks and changing resource allocations while the VM is powered off.
+11. **Backup and Snapshot (Optional):**
+    - Consider creating backups or snapshots of your VM to protect against data loss or to create restore points.
+12. Test and Monitor:
+    - Thoroughly test the VM to ensure it functions as expected.
+    - Use monitoring tools to keep an eye on resource utilization and performance.
+13. Regular Maintenance:
+    - Keep the VM and the ESXi host up to date with patches and updates.
+    - Regularly back up your VM and its data to prevent data loss.
+Remember that the specific steps and options may vary depending on your version of ESXi, the hardware configuration, and your organizational needs. VMware's documentation and support resources are valuable references for detailed instructions and troubleshooting guidance.
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+

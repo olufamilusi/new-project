@@ -1,0 +1,36 @@
+THIS IS A PLAYBOOK THAT CREATES MULTIPLE USERS AND GROUPS, ADDED THEM TO GROUPS, CREATED AN ENCRYPTED PASSWD HASH FOR THEM BY USING ADHOC COMMAND TO GENERATE THE HASH ANS THEN INSERTED IT INTO THE PLAYBOOK, AND LASTLY, USING THE COPY MODULE, I ADDED THE PROF GROUP TO THE SUDOERS FILE.
+
+
+---
+- name: create users
+  hosts: client1
+  vars:
+   users:
+   - username: kim
+     groups: profs
+   - username: christina
+     groups: students
+   - username: kelly
+     groups: profs
+   - username: bill
+     groups: students
+  tasks:
+
+  - name: create groups
+    group:
+      name: "{{ item.groups }}"
+      state: present
+    loop: "{{ users }}"
+  - name: create users and their groups
+    user:
+      name: "{{ item.username }}"
+      groups: "{{ item.groups }}"
+      password: $6$mysalt$NN1QGsmCO0hcvplH4ahY6ocho6F6TgcY8yNdMFAeO.LAeFodNPGA6KsQM5Or1AKbE4QKSqnEsC/SE0Zz3ts9y1
+    loop: "{{ users }}"
+
+  - name: Giving sudo priviledges to users
+    copy:
+      content: '%profs ALL=(ALL) NOPASSWD:ALL'
+      dest: /etc/sudoers.d/profs
+
+

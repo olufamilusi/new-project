@@ -1,0 +1,35 @@
+---
+- name: create logical volume and file system
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+  - name: create debug message
+    debug:
+      msg: "VG Not found"
+    when: ansible_lvm.vgs.research is not defined
+
+  - name: create logical volume with size of 1500M
+    lvol:
+      lv: data
+      vg: research
+      size: 1500
+    when: ansible_lvm.vgs.research.size_g > '1.5'
+
+  - name: create debug message
+    debug:
+      msg: "LV Can not be created with the following size"
+    when: ansible_lvm.vgs.research.size_g < '1.5'
+
+  - name: create logical volume with size of 800M
+    lvol:
+      lv: data
+      vg: research
+      size: 800
+    when: ansible_lvm.vgs.research.size_g < '1.5'
+
+  - name: create file system
+    filesystem:
+      dev: /dev/research/data
+      fstype: ext4

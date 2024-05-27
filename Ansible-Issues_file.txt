@@ -1,0 +1,24 @@
+---
+- name: set issue file
+  hosts: all
+  become: true
+
+  tasks:
+  - name: set issue file on dev hosts
+    copy:
+      content: Development
+      dest: /etc/issue
+    when: ('dev' in group_names)
+
+  - name: set issue file on test hosts
+    copy:
+      content: Test
+      dest: /etc/issue
+    when: ('test' in group_names)
+
+  - name: set issue file on prod hosts
+    copy:
+      content: Production
+      dest: /etc/issue
+    when: ('prod' in group_names)
+

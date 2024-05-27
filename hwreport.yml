@@ -1,0 +1,46 @@
+---
+- name: collect hardware info
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+  - name: copy file
+    copy:
+      src: hwreport.txt
+      dest: /root/hwreport.txt
+
+  - name: get my_sys
+    lineinfile:
+      regex: ^my_sys
+      line: my_sys={{ansible_hostname}}
+      state: present
+      path: /root/hwreport.txt
+
+  - name: get my_BIOS
+    lineinfile:
+      regex: ^my_BIOS
+      line: my_BIOS={{ansible_bios_version}}
+      state: present
+      path: /root/hwreport.txt
+
+  - name: get my_MEMORY
+    lineinfile:
+      regex: ^my_MEMORY
+      line: my_MEMORY={{ansible_memtotal_mb}}
+      state: present
+      path: /root/hwreport.txt
+
+  - name: get my_sda
+    lineinfile:
+      regex: ^my_sda
+      line: my_sda={%if ansible_devices.sda is defined%}{{ansible_devices.sda.size}}{%else%}NONE{%endif%}
+      state: present
+      path: /root/hwreport.txt
+
+  - name: get my_sdb
+    lineinfile:
+      regex: ^my_sdb
+      line: my_sdb={%if ansible_devices.sdb is defined%}{{ansible_devices.sdb.size}}{%else%}NONE{%endif%}
+      state: present
+      path: /root/hwreport.txt
