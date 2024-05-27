@@ -1,0 +1,3 @@
+how to fix vmware esxi installation error on my lenovo laptop "shutting down firmware services...Error allocating 0 pages: Out of resources. Failed to shutdown the boot services. Unrecoverable error.
+
+https://www.diskinternals.com/vmfs-recovery/fix-esxi-boot-failure-uefi-configuration/#:~:text=This%20could%20be%20due%20to,installation%20files%2C%20or%20hardware%20issues.

@@ -1,0 +1,62 @@
+Decommissioning a server involves a series of steps to ensure a smooth and secure process. Below is a general guideline for decommissioning a server:
+
+Document Server Details:
+Document important information about the server, such as its hostname, IP address, hardware specifications, installed software, and any dependencies. This documentation will be useful for future reference and auditing.
+
+Identify Stakeholders:
+Identify and communicate with stakeholders who may be affected by the decommissioning process. This could include system administrators, application owners, and end-users.
+
+Backup Data:
+Ensure that all critical data on the server is backed up before decommissioning. This includes databases, configuration files, user data, and any other information that needs to be preserved.
+
+Notify Users:
+Notify users and stakeholders about the planned decommissioning. Provide sufficient notice to allow them to make necessary adjustments or backups if they have data or services hosted on the server.
+
+Update Documentation:
+Update any documentation, configuration management databases, or asset management systems to reflect the decommissioning status. This ensures that records are accurate and up-to-date.
+
+Verify Data Backup:
+Double-check the backups to ensure that all critical data has been successfully backed up. Verify the integrity of the backup files and confirm that they can be restored if needed.
+
+Remove from Load Balancers or DNS:
+If the server is part of a load balancing setup or DNS configuration, remove it from these systems to redirect traffic away from the server.
+
+Update Monitoring and Alerts:
+Adjust monitoring systems and alert configurations to account for the decommissioned server. This prevents unnecessary alerts and ensures that monitoring systems accurately reflect the current state of the infrastructure.
+
+Disable Services:
+Disable any running services on the server. This may involve stopping web servers, databases, and other applications running on the server.
+
+Remove from Active Directory or LDAP:
+If the server is integrated with an authentication system like Active Directory or LDAP, remove its entry from the directory to prevent authentication issues.
+
+Remove from Inventory:
+Update the inventory records or asset management system to reflect that the server has been decommissioned. This helps in maintaining accurate records of the IT infrastructure.
+
+Physically Disconnect and Remove:
+If the server is a physical machine, physically disconnect it from the network and power source. Remove any labels or markings that identify it as an active server.
+
+Dispose of Hardware:
+Properly dispose of or repurpose the server hardware according to organizational policies. This might involve recycling, repurposing, or securely wiping the data from storage devices before disposal.
+
+Document Decommissioning:
+Document the decommissioning process, including the date, reason for decommissioning, and any other relevant details. This documentation can be valuable for auditing purposes.
+
+Verify Decommissioning:
+Verify that the server has been successfully decommissioned by checking its status in monitoring tools or conducting network scans.
+
+Archive Documentation:
+Archive the documentation related to the decommissioning process for future reference. This includes backups, notifications, and any other relevant records.
+
+Following these steps helps ensure that the decommissioning process is well-documented, secure, and minimizes any potential impact on users or the IT infrastructure.
+
+Even small to medium-sized companies have some sort of governance surrounding server decommissioning. They might not call it decommissioning but the process usually goes something like the following:
+
+Send out a notification or multiple notifications of system end-of-life to stakeholders
+Make complete backups of the entire system and its data
+Unplug the system from the network but leave the system running (2-week Scream test)
+Shutdown and unplug from power but leave the system racked (2-week incubation period)
+Unracking and palletizing or in some cases recommissioning
+The process in the last two companies I worked in, decommissioning was a 30-day process that started with notifications, a so-called "Scream" test, and a final shutdown, unracking, and palletizing for disposal. I love the term "Scream" test. This part of the process involves unplugging the system from the network for two weeks to see if anyone screams about a lost service
+
+

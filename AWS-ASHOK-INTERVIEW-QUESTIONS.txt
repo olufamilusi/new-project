@@ -1,0 +1,457 @@
+1. What is AWS Cloud?
+
+AWS Cloud refers to the suite of cloud computing services provided by Amazon Web Services (AWS), a subsidiary of Amazon. These services include computing power, storage, networking, databases, machine learning, artificial intelligence, analytics, and more, all delivered over the internet. AWS allows businesses to access and use these resources on-demand, paying only for what they use, without the need to invest in costly infrastructure and hardware.
+
+2. What is IAAS, PAAS, SAAS?
+
+IAAS (Infrastructure as a Service), PAAS (Platform as a Service), and SAAS (Software as a Service) are different models of cloud computing services:
+IAAS provides virtualized computing resources over the internet, including virtual machines, storage, and networking. Users manage the applications, data, runtime, middleware, and operating system, while the cloud provider is responsible for the underlying infrastructure.
+PAAS provides a platform allowing customers to develop, run, and manage applications without dealing with the infrastructure. It includes tools and services for application development, deployment, and management.
+SAAS delivers software applications over the internet on a subscription basis. Users access applications through a web browser without needing to install or maintain software locally.
+
+
+3. While creating new EC2 instance, need to execute some scripts, called as boot strapping? How you will do?
+
+Bootstrapping in AWS refers to the process of automatically executing scripts or commands on an EC2 instance when it launches. You can achieve this by using User Data, which allows you to specify a script or commands to run during instance initialization. You can provide User Data through the AWS Management Console, AWS CLI, or AWS SDKs.
+
+
+4. What is User Data in AWS ?
+
+User Data in AWS refers to the data that you can provide to an EC2 instance during its launch. It is typically used for bootstrapping purposes, allowing you to specify scripts, commands, or configuration data that will be executed or applied when the instance starts.
+
+5. What is AMI?
+
+AMI (Amazon Machine Image) is a pre-configured template used to create virtual machines (EC2 instances) in the AWS environment. It contains the operating system, application server, and other software required to run an instance. You can choose from a range of publicly available AMIs provided by AWS or create custom AMIs tailored to your specific requirements.
+
+
+6. What is Secret key and access key?
+
+Secret key and access key are credentials used to authenticate and authorize access to AWS resources through APIs, SDKs, and command-line tools. The access key is similar to a username, and the secret key is similar to a password. They are provided by AWS Identity and Access Management (IAM) and should be kept confidential.
+
+7. What is the use of Security Group?
+
+A Security Group in AWS acts as a virtual firewall that controls inbound and outbound traffic to EC2 instances, RDS instances, and other AWS resources. It defines rules that allow or deny traffic based on protocols, ports, and IP addresses. Security Groups are stateful, meaning that if you allow inbound traffic, the response traffic is automatically allowed, and vice versa.
+
+
+
+8. What are the different services you are using in AWS?
+
+The services used in AWS depend on the specific requirements and architecture of your application or infrastructure. However, common AWS services include:
+Compute: EC2, Lambda
+Storage: S3, EBS, EFS
+Networking: VPC, Route 53, ELB
+Database: RDS, DynamoDB
+Security: IAM, KMS
+Monitoring: CloudWatch
+Management: AWS Management Console, AWS CLI
+
+9. What exactly EC2 does in AWS ?
+
+EC2 (Elastic Compute Cloud) is a web service that provides resizable compute capacity in the cloud. It allows you to launch virtual servers (instances) on-demand, with the ability to scale up or down as needed. EC2 instances can run various operating systems and applications, providing flexibility and control over your computing resources.
+
+
+10. Have you ever worked on AWS CLI?
+
+Yes, the AWS CLI (Command Line Interface) is a powerful tool for managing AWS resources from the command line. It provides commands for performing various tasks, such as managing EC2 instances, S3 buckets, IAM users, and more. I have experience using the AWS CLI for provisioning resources, automating tasks, and troubleshooting issues in AWS environments.
+
+
+11. What is The Difference Between Scalability and Elasticity?
+
+Scalability refers to the ability of a system to handle increasing workload by adding resources or nodes to distribute the load. It involves designing a system that can accommodate growth without sacrificing performance. Scalability can be vertical (adding more resources to a single node) or horizontal (adding more nodes to a system).
+Elasticity, on the other hand, refers to the ability of a system to automatically provision and release resources in response to changing demand. It involves dynamically scaling resources up or down based on workload fluctuations. Elasticity allows for cost optimization and efficient resource utilization, ensuring that you only pay for the resources you need.
+
+
+12. What is EBS ?
+
+EBS (Elastic Block Store) is a block storage service provided by AWS for EC2 instances. It offers persistent, high-performance block-level storage volumes that can be attached to EC2 instances. EBS volumes are independent of the EC2 instance lifecycle, meaning that data persists even if the instance is stopped or terminated. EBS volumes are used for storing operating system, application data, and databases.
+
+
+13. Can we mount 1 EBS to multiple EC2 instances?
+
+No, EBS volumes can only be attached to a single EC2 instance at a time. Each EBS volume is associated with a specific EC2 instance and can only be mounted to that instance. If you need to share data between multiple EC2 instances, you can use other methods such as network file systems (NFS) or Amazon EFS (Elastic File System).
+
+
+14. What is Volume and Snapshot in EBS?
+
+In EBS, a volume is a block storage device that can be attached to an EC2 instance. It provides persistent storage that persists even if the instance is stopped or terminated. A snapshot, on the other hand, is a point-in-time copy of an EBS volume. Snapshots are used for data backup, disaster recovery, and creating new volumes. You can create snapshots of EBS volumes and use them to restore or create new volumes.
+
+
+15. Can we attach EBS to EC2 which are in different AZ but which are in same region?
+
+Yes, you can attach EBS volumes to EC2 instances that are in different Availability Zones (AZs) within the same AWS region. EBS volumes are designed to be highly available and durable, allowing you to attach them to instances in different AZs for redundancy and fault tolerance.
+
+
+16. What is EFS?
+
+EFS (Elastic File System) is a scalable, fully managed file storage service provided by AWS. It provides a simple, scalable, and highly available file system that can be shared across multiple EC2 instances. EFS supports NFS (Network File System) protocol, allowing EC2 instances to mount the file system and access shared data concurrently. EFS is suitable for a wide range of use cases, including content management, media processing, and data analytics.
+
+
+17. Purpose and use of S3?
+
+S3 (Simple Storage Service) is an object storage service provided by AWS for storing and retrieving data over the internet. It is highly durable, scalable, and secure, making it ideal for a wide range of use cases, including data backup, archival, content distribution, and website hosting. S3 allows you to store any type of data, including documents, images, videos, and application backups, and access it from anywhere in the world using a simple web interface or API.
+
+
+18. What is the file size limit in S3?
+
+The maximum file size limit for a single object stored in S3 is 5 terabytes (TB). However, there is no practical limit to the total amount of data you can store in an S3 bucket, making it suitable for storing large datasets, media files, and backups.
+
+
+19. What is Route53?
+
+Route 53 is a scalable and highly available domain name system (DNS) web service provided by AWS. It enables you to register domain names, route internet traffic to your website or web application, and manage domain name records (such as A records, CNAME records, and MX records). Route 53 also provides health checks and DNS failover capabilities for ensuring high availability and fault tolerance of your applications.
+
+
+20. What is difference between private and public subnet?
+
+A public subnet is a subnet in a VPC (Virtual Private Cloud) that has internet connectivity, allowing resources within the subnet to communicate with the internet and receive inbound traffic from the internet. A private subnet, on the other hand, is a subnet in a VPC that does not have internet connectivity by default. Resources within a private subnet can communicate with other resources within the VPC and with resources in other connected networks, but they cannot communicate directly with the internet or receive inbound traffic from the internet.
+
+
+21. How to access INTERNET on private subnet?
+
+To allow resources in a private subnet to access the internet, you can set up a NAT (Network Address Translation) gateway or a NAT instance in a public subnet. The NAT gateway/instance acts as a proxy, allowing resources in the private subnet to initiate outbound connections to the internet while blocking inbound traffic. To enable internet access:
+Set up a NAT gateway or NAT instance in a public subnet.
+Configure the route table associated with the private subnet to route internet-bound traffic (0.0.0.0/0) to the NAT gateway/instance.
+Ensure that network access control lists (NACLs) and security group rules allow outbound traffic from the private subnet to the NAT gateway/instance.
+
+
+22. What is NAT instance/NAT Gateway?
+
+NAT (Network Address Translation) instances and NAT gateways are AWS services that allow instances in private subnets to initiate outbound connections to the internet while blocking inbound traffic. They perform network address translation, translating private IP addresses of instances in the private subnet to a public IP address when communicating with the internet. The main difference between them is that NAT gateway is a managed service provided by AWS, offering higher scalability, availability, and redundancy compared to NAT instances, which are EC2 instances configured to perform NAT functionality.
+
+
+23. Components of VPC?
+
+A VPC (Virtual Private Cloud) in AWS consists of several components:
+Subnets: Segments of IP address ranges within the VPC where you can place resources.
+Route Tables: Define rules for routing traffic between subnets and to the internet.
+Internet Gateway: Provides internet connectivity to resources in the VPC.
+NAT Gateway/NAT Instance: Allows resources in private subnets to access the internet.
+Security Groups: Act as virtual firewalls to control inbound and outbound traffic to instances.
+Network ACLs: Stateless firewall rules that control traffic at the subnet level.
+VPC Peering: Enables communication between VPCs within the same or different AWS accounts.
+VPN Connections: Allows secure communication between the VPC and an on-premises network using VPN tunnels.
+VPC Endpoints: Enables private connectivity to AWS services without going through the internet.
+
+
+24. Types of storage in AWS?
+
+AWS offers various types of storage services to cater to different use cases and performance requirements:
+Object Storage: Amazon S3, Glacier
+Block Storage: Amazon EBS
+File Storage: Amazon EFS
+Shared File Storage: FSx for Windows File Server, FSx for Lustre
+Backup and Archive: AWS Backup, Storage Gateway
+Data Transfer: AWS Transfer Family, Snowball, Snowmobile
+
+
+25. Difference between S3 & Glacier?
+
+Amazon S3 (Simple Storage Service) is an object storage service designed for storing and retrieving any amount of data over the internet. It provides high availability, durability, and low latency access to data.
+Amazon Glacier is a low-cost archival storage service designed for long-term data retention and backup. It is optimized for infrequently accessed data and offers lower storage costs compared to S3. However, retrieving data from Glacier typically takes longer (several hours) compared to S3.
+
+26. Different types of storage classes in S3?
+
+S3 offers various storage classes optimized for different use cases and access patterns:
+S3 Standard: General-purpose storage with high availability, durability, and low latency access.
+S3 Standard-IA (Infrequent Access): Designed for data accessed less frequently but requires rapid access when needed.
+S3 One Zone-IA: Similar to S3 Standard-IA but stores data in a single availability zone, reducing costs.
+S3 Intelligent-Tiering: Automatically moves objects between different storage tiers based on access patterns to optimize costs.
+S3 Glacier: Designed for long-term archival storage with retrieval times ranging from minutes to hours.
+S3 Glacier Deep Archive: Lowest-cost storage class for long-term archival data with retrieval times of 12 hours or more.
+
+
+27. What are Glacier and Snowball?
+
+Glacier and Snowball are AWS services for data archival and transfer:
+Amazon Glacier: Glacier is a low-cost archival storage service designed for long-term data retention and backup. It is optimized for infrequently accessed data and offers durable storage at a low cost. Glacier provides multiple retrieval options with varying retrieval times and costs.
+AWS Snowball: Snowball is a physical data transfer service that allows you to securely transfer large amounts of data into and out of AWS. It consists of ruggedized storage devices (Snowball appliances) that you can use to transfer data offline. Snowball helps accelerate data transfer, especially for large datasets that would take a long time to transfer over the internet.
+
+
+
+28. What is Auto scaling?
+
+Auto Scaling is an AWS service that automatically adjusts the number of EC2 instances or other resources in response to changes in demand or traffic. It helps maintain application availability, performance, and cost efficiency by dynamically scaling resources up or down based on predefined scaling policies or metrics. Auto Scaling can be used to scale applications horizontally (adding more instances) or vertically (resizing instances).
+
+29. What is Region & Availability Zone?
+
+In AWS, a Region is a geographical area where AWS maintains multiple Availability Zones (AZs). Each Region consists of multiple isolated data centers (AZs) located in different geographic locations within a specific geographic area. Availability Zones are physically separate locations with independent power, cooling, and networking infrastructure. They are connected through low-latency, high-throughput links, allowing you to deploy highly available and fault-tolerant applications across multiple AZs within a Region.
+
+
+30. What is cloud watch?
+
+Amazon CloudWatch is a monitoring and observability service provided by AWS for monitoring AWS resources and applications in real-time. It collects and tracks metrics, logs, and events, providing insights into the health, performance, and security of your AWS environment. CloudWatch allows you to set up alarms, dashboards, and automated actions based on predefined thresholds or patterns, helping you proactively monitor and manage your AWS infrastructure.
+
+
+31. Difference between NACL and Security Group?
+
+Network Access Control Lists (NACLs) and Security Groups are both used to control inbound and outbound traffic to AWS resources, but they operate at different levels of the network stack and have different capabilities:
+NACLs are stateless firewall rules that act as a subnet-level firewall, controlling traffic at the subnet level. They evaluate rules based on source and destination IP addresses, protocols, and port numbers. NACLs are applied to subnets and are evaluated before Security Groups.
+Security Groups are stateful virtual firewalls that control traffic at the instance level. They operate at the instance's network interface level and control inbound and outbound traffic based on security group rules. Security Groups are more flexible and granular than NACLs and can be applied to individual instances or instance groups.
+
+
+32. S3 lifecycle?
+
+S3 lifecycle management allows you to define rules to automatically transition objects between different storage tiers (e.g., from Standard to Infrequent Access or Glacier) or expire objects after a specified time period. This helps optimize storage costs by moving infrequently accessed data to lower-cost storage classes or deleting expired data. You can define lifecycle policies at the bucket level to apply to all objects in the bucket or at the object level to apply to specific objects.
+
+
+33. What is static or elastic IP?
+
+In AWS, a static IP address (Elastic IP) is a public IPv4 address that you can allocate and associate with an EC2 instance or a network interface. It remains associated with your account until you explicitly release it, allowing you to retain the same IP address even if you stop or terminate the instance. An elastic IP provides a fixed public IP address that you can use for your instance, making it suitable for applications that require a consistent IP address for inbound traffic.
+
+
+34. How do you connect to windows instances?
+
+You can connect to Windows instances in AWS using Remote Desktop Protocol (RDP). Here's how:
+Obtain the public IP address or DNS name of the Windows instance.
+Ensure that the security group associated with the instance allows inbound traffic on port 3389 (RDP).
+Open the Remote Desktop Connection application on your local computer.
+Enter the public IP address or DNS name of the instance in the "Computer" field.
+Click "Connect" and enter the username and password of the Windows instance when prompted.
+You should now be connected to the Windows instance using Remote Desktop.
+
+
+35. What is the difference between EBS, S3, and EFS?
+
+EBS (Elastic Block Store) is a block storage service used for storing persistent data volumes that can be attached to EC2 instances.
+S3 (Simple Storage Service) is an object storage service used for storing and retrieving any type of data over the internet.
+EFS (Elastic File System) is a file storage service used for creating scalable file systems that can be shared across multiple EC2 instances.
+The main differences:
+EBS provides block-level storage optimized for EC2 instances, while S3 provides object storage accessible over HTTP/HTTPS.
+EBS volumes are mounted as block devices to EC2 instances, while S3 stores data as objects in buckets.
+EFS supports file-level storage and can be mounted to multiple EC2 instances concurrently, while EBS volumes are typically mounted to a single EC2 instance.
+
+
+36. If you lost the .pem file then how will you connect to EC2?
+
+If you lose the .pem file used to authenticate SSH connections to an EC2 instance, you may still be able to access the instance using other methods, such as connecting through the AWS Management Console or resetting the instance's key pair:
+Use EC2 Instance Connect: If Instance Connect is enabled on the instance, you can connect to the instance using the AWS Management Console without requiring a key pair.
+Stop the instance and detach the root volume: You can stop the instance, detach its root volume, attach the volume to another instance as a secondary volume, modify its contents to create a new user or reset the password, reattach the volume to the original instance, and then restart the instance.
+Create a new key pair and replace the existing key pair: If you have administrative access to the instance, you can create a new key pair in the AWS Management Console, associate it with the instance, and then use it to connect to the instance.
+
+37. What is IAM?
+
+IAM (Identity and Access Management) is a web service provided by AWS for managing users, groups, roles, and permissions. IAM allows you to control access to AWS resources securely by defining who can do what within your AWS environment. You can create and manage IAM users, assign permissions using policies, enable multi-factor authentication (MFA), and integrate with external identity providers (IdPs) for centralized authentication.
+
+
+38. How will attach policy for IAM users by group or individual?
+
+How to attach policy for IAM users by group or individual?
+To attach policies to IAM users or groups in AWS, you can follow these steps:
+Using the AWS Management Console:
+Sign in to the AWS Management Console and open the IAM console.
+In the navigation pane, choose "Users" or "Groups" depending on whether you want to attach policies to individual users or groups.
+Select the user or group to which you want to attach the policy.
+In the "Permissions" tab, choose "Add permissions".
+Choose "Attach policies directly" to attach policies to the user or group directly, or choose "Add inline policy" to create a policy directly.
+Search for the policy you want to attach, select it, and then choose "Attach policy".
+Using the AWS CLI:
+To attach a policy to an IAM user:
+
+aws iam attach-user-policy --user-name <user-name> --policy-arn <policy-arn>
+
+To attach a policy to an IAM group:
+
+
+aws iam attach-group-policy --group-name <group-name> --policy-arn <policy-arn>
+Replace <user-name>, <group-name>, and <policy-arn> with the appropriate values.
+
+39. Types of Load Balancers and example?
+
+AWS provides three types of load balancers:
+Classic Load Balancer (CLB): Provides basic load balancing across multiple EC2 instances in one or more Availability Zones. It operates at both the request and connection level. Example: Application Load Balancer (ALB).
+Application Load Balancer (ALB): Routes traffic based on advanced application-level routing and supports features like path-based routing, host-based routing, and integration with AWS services like AWS WAF (Web Application Firewall) and AWS Lambda.
+Network Load Balancer (NLB): Routes traffic based on IP protocol data, such as IP addresses and ports. It is ideal for handling high volumes of traffic and supports static IP addresses, high throughput, and ultra-low latency.
+Examples include:
+Classic Load Balancer (CLB): Example: Elastic Load Balancing Classic Load Balancer.
+Application Load Balancer (ALB): Example: Amazon EC2 Container Service (ECS) load balancer.
+Network Load Balancer (NLB): Example: High-performance applications requiring high throughput and low latency.
+
+
+40. Can we route requests to EC2 which are running in different region where as ELB is in different region using only ELB? if not what is the solution for this?
+
+No, ELB (Elastic Load Balancer) can only route requests to EC2 instances within the same AWS region as the ELB. If you need to route requests to EC2 instances in different regions, you can use the following solutions:
+Global Accelerator: AWS Global Accelerator is a networking service that enables you to improve the availability and performance of your applications by directing traffic to the optimal AWS endpoint based on global routing policies, health checks, and traffic policies.
+Route 53 Latency-Based Routing: You can use Amazon Route 53 to route traffic to different regions based on latency. Route 53's latency-based routing feature automatically directs users to the AWS region that provides the lowest latency based on their geographic location or network conditions.
+Application-Level Redirection: Implement application-level redirection or DNS-based load balancing within your application to direct traffic to EC2 instances in different regions based on custom routing logic or user preferences.
+
+
+41. Can you explain types of EBS volumes?
+
+EBS (Elastic Block Store) volumes in AWS come in different types optimized for various performance and cost requirements:
+General Purpose SSD (gp2): This is the default volume type for EBS volumes. It offers a balance of price and performance for a wide variety of workloads. It delivers single-digit millisecond latencies and provides a baseline performance of 3 IOPS per GB with the ability to burst up to 3,000 IOPS.
+Provisioned IOPS SSD (io1): This volume type is designed for I/O-intensive workloads requiring consistent and predictable performance. You can provision a specific number of IOPS (input/output operations per second) based on your application's requirements, ranging from 100 to 64,000 IOPS per volume.
+Throughput Optimized HDD (st1): This volume type is optimized for frequently accessed, throughput-intensive workloads, such as big data, data warehouses, and log processing. It delivers low-cost storage with a maximum throughput of 500 MB/s per volume.
+Cold HDD (sc1): This volume type is designed for less frequently accessed workloads and provides the lowest-cost storage option. It is suitable for large, sequential workloads with a maximum throughput of 250 MB/s per volume.
+Magnetic (standard): This is the original EBS volume type offering low-cost storage for workloads with light I/O requirements. It provides magnetic storage and is ideal for workloads where cost is a primary consideration and performance requirements are 
+
+
+42.What is Elastic Bean Stalk?
+
+Elastic Beanstalk is a Platform as a Service (PaaS) offering from AWS that simplifies the deployment and management of web applications and services. It automatically handles the deployment, scaling, monitoring, and infrastructure provisioning, allowing developers to focus on writing code without worrying about the underlying infrastructure. Elastic Beanstalk supports multiple programming languages, frameworks, and containerized environments, making it easy to deploy applications quickly and efficiently.
+
+43. What is VPC peering and how to do it?
+
+VPC peering is a networking connection between two VPCs that enables instances in the VPCs to communicate with each other securely using private IP addresses. To create a VPC peering connection:
+Open the VPC console in the AWS Management Console.
+In the navigation pane, choose "Peering Connections", and then choose "Create Peering Connection".
+Specify the details of the peering connection, including the requester VPC and the peer VPC.
+Ensure that the VPCs have non-overlapping IP ranges and do not have overlapping CIDR blocks.
+Choose "Create Peering Connection" to create the peering connection.
+Accept the peering connection in the other VPC by navigating to "Peering Connections" and choosing "Accept Request".
+Update the route tables in both VPCs to allow traffic to flow between them by adding routes for the CIDR blocks of the peer VPC.
+
+
+44. What is Serverless Computing and how to achieve it in AWS?
+
+Serverless computing is a cloud computing model where cloud providers manage the infrastructure, allowing developers to focus on writing code without worrying about provisioning or managing servers. In AWS, serverless computing is primarily achieved using AWS Lambda, a compute service that runs code in response to events and automatically scales based on demand. To achieve serverless computing in AWS:
+1. Write your application code as stateless functions or microservices.
+2. Package your code and any dependencies into a deployment package.
+3. Upload the deployment package to AWS Lambda.
+4. Define event sources (e.g., API Gateway, S3, SNS) that trigger the execution of your Lambda functions.
+5. Set up permissions and configure triggers for your Lambda functions using AWS IAM and other AWS services.
+6. Monitor and manage your Lambda functions using AWS CloudWatch and other AWS monitoring tools.
+
+
+
+45. Which protocols Elastic Load Balancer will support?
+
+Elastic Load Balancer (ELB) supports the following protocols:
+-- HTTP: Used for routing HTTP traffic to backend instances. ELB can perform health checks and distribute traffic based on HTTP headers, paths, or query strings.
+-- HTTPS: Provides encrypted communication over HTTP. ELB can terminate SSL/TLS connections and forward decrypted traffic to backend instances.
+-- TCP: Used for routing TCP traffic to backend instances. ELB forwards TCP packets without inspecting the content, making it suitable for protocols like SMTP, FTP, and SSH.
+-- SSL: Similar to HTTPS but designed for SSL-encrypted traffic. ELB can terminate SSL connections and forward decrypted traffic to backend instances.
+-- UDP: Used for routing UDP traffic to backend instances. ELB forwards UDP packets without inspecting the content, making it suitable for protocols like DNS and DHCP.
+
+
+46. What is RDS service in AWS?
+
+RDS (Relational Database Service) is a managed database service provided by AWS for deploying, operating, and scaling relational databases in the cloud. RDS automates common administrative tasks such as provisioning, patching, backup, recovery, and scaling, allowing developers to focus on building applications rather than managing databases. RDS supports popular relational database engines such as MySQL, PostgreSQL, MariaDB, Oracle, SQL Server, and Amazon Aurora.
+
+
+47. What is Dynamo DB and When to use it?
+
+DynamoDB is a fully managed NoSQL database service provided by AWS for building fast and scalable applications. It offers seamless scalability, high availability, and low latency access to data, making it suitable for a wide range of use cases, including:
+. Real-time applications: DynamoDB can handle millions of requests per second with single-digit millisecond latency, making it ideal for real-time applications like gaming, IoT, and mobile apps.
+. Web applications: DynamoDB can store and retrieve large volumes of data with predictable performance, making it suitable for web applications with rapidly changing workloads.
+. Ad tech: DynamoDB's low-latency access and scalability make it suitable for ad tech platforms requiring real-time bidding and analytics.
+. Content management: DynamoDB can store and serve dynamic content, user profiles, and session data for content management systems and e-commerce platforms.
+
+48. Can you tell me the protocols and their port numbers you have used?
+
+In AWS, different services use various protocols and port numbers for communication. Some common protocols and their associated port numbers include:
+HTTP (Hypertext Transfer Protocol): Port 80
+HTTPS (HTTP Secure): Port 443
+SSH (Secure Shell): Port 22
+SMTP (Simple Mail Transfer Protocol): Port 25
+FTP (File Transfer Protocol): Port 21
+RDP (Remote Desktop Protocol): Port 3389
+DNS (Domain Name System): Port 53
+NTP (Network Time Protocol): Port 123
+MySQL: Port 3306
+PostgreSQL: Port 5432
+MongoDB: Port 27017
+Redis: Port 6379
+Elasticsearch: Port 9200 (HTTP) and 9300 (TCP)
+Memcached: Port 11211
+
+49. What is Pre-Signed URL in S3?
+
+A Pre-Signed URL (also known as a presigned URL or pre-signed URL) in Amazon S3 is a URL that provides temporary access to an S3 object. It allows you to grant time-limited access to a specific object in your S3 bucket without requiring users to have AWS credentials. Pre-signed URLs are commonly used for sharing private content securely with third parties or for providing temporary access to files for download.
+Pre-signed URLs are generated using AWS SDKs or the AWS CLI by signing a request with your AWS credentials. You can specify the duration for which the pre-signed URL is valid, typically ranging from a few minutes to several hours, and provide it to the authorized user. After the expiration time, the pre-signed URL becomes invalid, and access to the object is denied.
+
+50. How to work with Docker Containers in AWS?
+
+AWS provides several services and features for working with Docker containers:
+1. Amazon ECS (Elastic Container Service): ECS is a fully managed container orchestration service that allows you to run Docker containers in the cloud. ECS manages the underlying infrastructure, scheduling, scaling, and monitoring of containerized applications.
+2. Amazon EKS (Elastic Kubernetes Service): EKS is a managed Kubernetes service that enables you to deploy, manage, and scale Kubernetes clusters for containerized applications. EKS simplifies the deployment and operation of Kubernetes on AWS.
+3. Amazon ECR (Elastic Container Registry): ECR is a fully managed Docker container registry service that allows you to store, manage, and deploy Docker container images in a secure and scalable manner. ECR integrates seamlessly with ECS, EKS, and other container services.
+4. AWS Fargate: Fargate is a serverless compute engine for containers that allows you to run containers without managing the underlying infrastructure. It provides a fully managed platform for deploying and scaling containerized applications without provisioning or managing servers.
+
+51. How many AWS regions available in India?
+
+As of my last update, AWS has two regions in India:
+Asia Pacific (Mumbai) Region
+Asia Pacific (Hyderabad) Region (announced, but not yet available)
+
+
+52. How to install Java in EC2 machine?
+
+You can install Java on an EC2 instance running Linux using package managers like yum or apt, depending on the Linux distribution. Here are the general steps:
+For Amazon Linux or CentOS:
+
+sudo yum install java
+For Ubuntu or Debian:
+
+
+sudo apt update
+sudo apt install default-jre
+To install the Java Development Kit (JDK), you can use:
+
+sudo yum install java-devel   # For Amazon Linux or CentOS
+sudo apt install default-jdk  # For Ubuntu or Debian
+
+
+
+
+53. What is Key – Pair in AWS?
+
+In AWS, a key pair is a set of public and private keys used for securely connecting to EC2 instances via SSH (Secure Shell) or RDP (Remote Desktop Protocol). When you launch an EC2 instance, you can specify a key pair, and AWS will associate the public key with the instance. You can then use the corresponding private key to authenticate and securely access the instance.
+Key pairs are used for secure communication between your local computer and the EC2 instance, ensuring that only authorized users with the private key can access the instance remotely.
+
+54. How to connect with EC2 using Putty Software?
+
+To connect to an EC2 instance using PuTTY on Windows, follow these steps:
+1. Download and install PuTTY and PuTTYgen from the PuTTY website.
+2. Convert the PEM key pair file to PPK format using PuTTYgen:
+Open PuTTYgen, click "Load", and select your PEM key pair file.
+Click "Save private key" and save the converted PPK file.
+3. Open PuTTY, enter the public DNS or IP address of your EC2 instance, and configure the connection settings.
+4. In the left navigation pane, expand "Connection", select "SSH", and then select "Auth".
+5. Click "Browse" and select the PPK private key file you generated.
+6. Return to the "Session" category, enter a name for the session in "Saved Sessions", and click "Save".
+7. Click "Open" to establish the SSH connection to your EC2 instance using PuTTY.
+
+
+55. How many buckets we can create in S3 by default?
+
+By default, each AWS account can create up to 100 S3 buckets per AWS Region. This limit applies to the total number of buckets across all AWS Regions within the account. However, you can request a service limit increase from AWS Support if you need to create more buckets.
+
+56. What is SNS and how to use it?
+
+. SNS (Simple Notification Service) is a fully managed pub/sub (publish-subscribe) messaging service provided by AWS. It enables you to send messages or notifications to a large number of subscribers or endpoints, such as Amazon SQS queues, AWS Lambda functions, HTTP/HTTPS endpoints, email addresses, SMS messages, and mobile devices (via push notifications).
+. To use SNS:
+1. Create an SNS topic: A topic is a communication channel to which messages are sent and subscribed.
+2. Subscribe endpoints to the topic: Endpoints can be AWS services, email addresses, phone numbers, or HTTP/HTTPS endpoints.
+3. Publish messages to the topic: You can publish messages to the topic using the AWS Management Console, AWS SDKs, AWS CLI, or SNS API.
+4. Subscribed endpoints receive messages: When a message is published to the topic, SNS delivers the message to all subscribed endpoints.
+
+57. What is the difference between Horizontal and Vertical Scaling?
+
+Horizontal scaling and vertical scaling are two approaches to increasing the capacity or performance of a system:
+Horizontal Scaling (Scale Out): Involves adding more instances or resources to distribute the workload across multiple machines. It typically involves adding identical instances to a pool of resources and using load balancing to distribute incoming requests across them. Horizontal scaling improves fault tolerance and scalability but may require additional management overhead.
+Vertical Scaling (Scale Up): Involves increasing the capacity of individual instances or resources by upgrading their size, such as adding more CPU, memory, or storage to a single machine. Vertical scaling improves performance and capacity of individual instances but may have limitations in terms of scalability and cost efficiency.
+
+58. What are the DB Engines supported by RDS?
+
+Amazon RDS (Relational Database Service) supports several database engines, including:
+MySQL
+PostgreSQL
+MariaDB
+Oracle Database
+Microsoft SQL Server
+Amazon Aurora (MySQL and PostgreSQL-compatible)
+
+
+59. How Root user is different from IAM user?
+
+. The Root user is the initial user account created when you create an AWS account. It has unrestricted access to all AWS services and resources within the account and should be used only for initial account setup and billing management. The Root user has full administrative privileges, including the ability to create and delete IAM users, manage security credentials, and access billing information.
+. IAM (Identity and Access Management) users, on the other hand, are created within the AWS account and are used to grant access to AWS resources to individuals or applications. IAM users can have granular permissions assigned to them using IAM policies, limiting their access to only the resources and actions they need. IAM users should be used for day-to-day tasks and should follow the principle of least privilege to minimize the risk of unauthorized access.
+
+
+60. Why we should create groups in IAM?
+
+Creating IAM groups in AWS allows you to organize users and manage permissions more efficiently. Some reasons for creating IAM groups include:
+. Simplified management: Groups allow you to assign permissions to multiple users simultaneously, reducing the administrative overhead of managing individual permissions for each user.
+. Centralized control: By associating users with groups, you can centrally manage permissions and policies for multiple users who have similar roles or responsibilities.
+. Scalability: Groups make it easier to scale permissions as your organization grows by adding users to existing groups with predefined permissions.
+. Security best practices: Following security best practices, such as the principle of least privilege, becomes easier when using groups, as you can assign permissions based on roles or responsibilities rather than individual users.

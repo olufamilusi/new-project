@@ -1,0 +1,11 @@
+https://www.udemy.com/course/draft/2359992/learn/lecture/14914526#overview --hardware
+
+https://www.udemy.com/course/build-and-deploy-a-lamp-server-on-aws/?start=0#overview  --lamp-server
+
+https://www.udemy.com/course/introduction-cloud-computing/?start=0#overview --cloud-computing
+
+https://www.udemy.com/course/mastering-aws-featuring-iam/?start=0#overview  --aws-iam
+
+https://www.youtube.com/watch?v=mWZ_g9yXFJg --How to Get and Install VMware vSphere 8 for FREE (Installing ESXi)
+
+https://www.youtube.com/watch?v=TmrS7FhaaRA&list=PLlr7wO747mNrUoTuXhZ0REJw3hL4oWvLm  --All About RHCSA || RHCSA Exam Experience, Common Questions, Fears, Tips || RHCSA Remote Exam Setu

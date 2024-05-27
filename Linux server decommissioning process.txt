@@ -1,0 +1,40 @@
+https://itrecycle2020.medium.com/a-comprehensive-guide-on-how-to-decommission-a-server-focusing-on-windows-servers-c682e7a60bef
+
+
+
+The process in the last two companies I worked in, decommissioning was a 30-day process that started with notifications, a so-called "Scream" test, and a final shutdown, unracking, and palletizing for disposal.
+This part of the process involves unplugging the system from the network for two weeks to see if anyone screams about a lost service. It's effective and I've had my share of opportunities to reverse a decomm for last-minute file recovery and then to restart the process again.
+Even small to medium-sized companies have some sort of governance surrounding server decommissioning. They might not call it decommissioning but the process usually goes something like the following:
+
+Send out a notification or multiple notifications of system end-of-life to stakeholders
+Make complete backups of the entire system and its data
+Unplug the system from the network but leave the system running (2-week Scream test)
+Shutdown and unplug from power but leave the system racked (2-week incubation period)
+Unracking and palletizing or in some cases recommissioning
+I personally loved the decomm process. There's something fulfilling about it. I liked spending time in the data center, DBANning disks, unplugging systems, and filling out unracking requests. 
+
+The importance of this process cannot be overstated, as improper decommissioning can lead to data breaches, compliance issues, and unnecessary costs.
+
+The Lifecycle of a Server
+--------------------------
+The average lifespan of a server is around 3 to 5 years, although some can last longer depending on usage and maintenance
+
+Risks and Costs of Negligence
+Failure to properly decommission a server can lead to a host of problems. One of the most significant risks is data security. Old servers often contain sensitive information that can be exploited if not properly erased. Additionally, outdated servers are more vulnerable to cyber-attacks as they may not receive regular security updates.
+
+
+Preparing for Server Decommissioning
+Backup and Data Migration
+Steps to Back Up Important Data
+
+Identify Critical Data: Locate all the essential files, databases, and configurations that need to be backed up.
+Choose a Backup Solution: Decide whether to use cloud-based solutions, external hard drives, or other backup methods.
+Perform the Backup: Execute the backup process, ensuring all critical data is securely stored.
+Verify the Backup: Once the backup is complete, verify that all data has been accurately and completely stored.
+
+Options for Data Migration
+
+Cloud Storage: Migrate data to a cloud service for easy access and redundancy.
+New Server: If replacing the old server, transfer the data directly to the new server.
+Archival Storage: For less frequently accessed data, consider using long-term archival solutions.
+

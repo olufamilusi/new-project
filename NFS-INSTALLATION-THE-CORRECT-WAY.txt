@@ -1,0 +1,62 @@
+SERVER SIDE
+------------
+[1]	Configure NFS Server.
+# dnf -y install nfs-utils
+# vi /etc/idmapd.conf
+
+# line 5 : uncomment and change to your domain name
+Domain = gtrybes.net
+(on you /etc/hosts file, your IP address has to go along with your domain name as well as cannonical name. ex 192.168.1.23 lummy.gtrybes.net lummy, 192.168.1.22 dee.gtrybes.net dee )
+
+ vi /etc/exports
+# create new
+# for example, set [/home/nfsshare] as NFS share
+/home/nfsshare 192.168.1.0/24(rw,no_root_squash)
+[root@dlp ~]# mkdir /home/nfsshare
+[root@dlp ~]# systemctl enable --now rpcbind nfs-server
+[2] If Firewalld is running, allow NFS service.
+[root@dlp ~]# firewall-cmd --add-service=nfs
+[root@dlp ~]# firewall-cmd --runtime-to-permanent
+[root@dlp ~]# exportfs -a
+
+CLIENT SIDE
+=============
+[1]	Configure NFS Client.
+[root@node01 ~]# dnf -y install nfs-utils
+[root@node01 ~]# vi /etc/idmapd.conf
+# line 5 : uncomment and change to your domain name
+Domain = gtrybes.net
+(on you /etc/hosts file, your IP address has to go along with your domain name as well as cannonical name. ex 192.168.1.23 lummy.gtrybes.net lummy, 192.168.1.22 dee.gtrybes.net dee )
+
+
+[root@node01 ~]# mount -t lummy.gtrybes.net:/home/nfsshare /mnt
+[root@node01 ~]# df -hT
+[2]	To mount automatically when System starts, Configure setting in [/etc/fstab].
+# vi /etc/fstab
+# add to the end : set NFS share
+lummy.gtrybes.net:/home/nfsshare /mnt               nfs     defaults        0 0
+
+[3]	To mount dynamically when anyone access to NFS Share, Configure AutoFS.
+
+# dnf -y install autofs
+# vi /etc/auto.master
+# add to the end
+/-    /etc/auto.mount 
+
+
+# vi /etc/auto.mount
+# create new : [mount point] [option] [location]
+/mnt   -fstype=nfs,rw  lummy.gtrybes.net:/home/nfsshare
+
+[root@node01 ~]# systemctl enable --now autofs
+# move to the mount point to verify mounting
+[root@node01 ~]# cd /mnt
+[root@node01 mnt]# df -hT
+Filesystem                   Type  Size  Used Avail Use% Mounted on
+lummy.gtrybes.net:/home/nfsshare nfs4   26G  1.8G   25G   7% /mnt
+
+[root@node01 mnt]# grep /mnt /proc/mounts
+
+
+
+

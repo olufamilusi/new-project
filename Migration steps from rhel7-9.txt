@@ -1,0 +1,24 @@
+Download Rhel7 
+Make sure your memory is at least 2048
+Your size is like 15G
+
+When you start your server
+Do yum update on your server
+do subscription-manager register
+do subscription-manager attach-auto
+do subsctiption-manager repo --list and pick the one that says rhel7 server extras rpms
+
+next, do leapp preupgrade --This check will let you see if there are any config issus before you do the upgrade. Usually there is one or two issues relating to kernel drivers not being compatible with rhel 8 and secondly about a file called answerfile that you need to vi into and uncomment the confirm and change its value to true
+
+vi /var/log/leapp/answerfile (uncomment confirm and write true there)
+confirm = True
+
+run the leapp upgrade command again-- to check if issue has been fixed. If you still have kernel drivers error, vi into /var/log/leapp/leapp-report.txt and rm kernel drivers  which are not supported by rhel 8 by running this command
+#modprobe -r pata_acpi
+
+and again, run the leapp upgrade command ( to make sure all issues are removed)
+
+Next, 
+
+You run the leap upgrade command to upgrade your server from rhel7 to rhel8
+and next, you reboot

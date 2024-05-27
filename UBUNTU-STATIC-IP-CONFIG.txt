@@ -1,0 +1,18 @@
+ip -c link show (To show you your interface name)
+
+vi /etc/network/interfaces
+
+And enter your static addr like below
+
+auto ens192
+iface ens192 inet static
+address 192.168.1.23
+netmask 255.255.255.0
+gateway 192.168.1.254
+dns-nameservers 8.8.8.8
+
+save and exit
+
+next, on the command line, type
+# sudo apt -y update && sudo apt
+# sudo apt install ssh -y (for ssh)

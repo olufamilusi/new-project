@@ -1,0 +1,8 @@
+How to install MySQL 8 in Linux step by step?
+Step 1: Enable MySQL Repositories.
+Step 2: Install MySQL Repositories.
+Step 3: Refresh the Repositories.
+Step 4: Install MySQL.
+Step 5: Set up MySQL Security. Validate Password Plugin. Change Root Password. Configure MySQL Security.
+Step 6: Start, Stop, or Check Status of MySQL Service.
+Step 7: Launch MySQL to Enter Commands.

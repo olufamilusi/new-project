@@ -1,0 +1,42 @@
+Apache Tomcat Installation Steps on Linux or RHEL 9
+Install package 'java-11-openjdk-headless
+yum install java-11-openjdk-headless*
+useradd -r -m -U -d /opt/tomcat -s /bin/false tomcat
+wget -c https://dlcdn.apache.org/tomcat/tomca...
+https://dlcdn.apache.org/tomcat/tomca...
+
+tar xf apache-tomcat-10.1.17.tar.gz -C /opt/tomcat
+ln -s /opt/tomcat/apache-tomcat-10.1.17 /opt/tomcat/updated
+chown -R tomcat: /opt/tomcat/*
+sh -c 'chmod +x /opt/tomcat/updated/bin/*.sh'
+vi /etc/systemd/system/tomcat.service
+--------------------------------
+[Unit]
+Description=Apache Tomcat Web Application Container
+After=network.target
+
+[Service]
+Type=forking
+
+Environment="JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.21.0.9-2.el9.x86_64"
+Environment="CATALINA_PID=/opt/tomcat/updated/temp/tomcat.pid"
+Environment="CATALINA_HOME=/opt/tomcat/updated/"
+Environment="CATALINA_BASE=/opt/tomcat/updated/"
+Environment="CATALINA_OPTS=-Xms512M -Xmx1024M -server -XX:+UseParallelGC"
+Environment="JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom"
+
+ExecStart=/opt/tomcat/updated/bin/startup.sh
+ExecStop=/opt/tomcat/updated/bin/shutdown.sh
+
+User=tomcat
+Group=tomcat
+UMask=0007
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+--------------------------------------------------------
+systemctl daemon-reload
+systemctl start tomcat
+systemctl enable tomcat

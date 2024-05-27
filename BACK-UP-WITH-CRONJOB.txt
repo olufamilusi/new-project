@@ -1,0 +1,48 @@
+Things to consider when doing backups
+create backup server on remote server
+mkdir /backup-server
+
+compress files on local server and send to remote server
+use scp to send files alone
+use scp -r to send directories along with files
+
+scp -r file-name 192.168.1.20:/backup-server/
+
+To retrieve a mistakenly deleted file on the local system and in order to retrieve them, you will use
+
+scp 192.168.1.20:/backup-server/file-name.gz .
+========================================================================================================================================
+how to use cronjob to take backups of local server 192.168.1.20 everyday in a compressed manner and send to a remote server directory 192.168.1.21:/backup directory
+======================================================================================================================================
+Create a Backup Script on Local Server:First, create a backup script, let's name it backup.sh, on your local server (192.168.1.20):
+
+
+#!/bin/bash
+
+# Directory to store backups
+BACKUP_DIR="/path/to/backup/directory"
+
+# Create a filename with current date
+BACKUP_FILE="$BACKUP_DIR/backup_$(date +%Y%m%d).tar.gz"
+
+# Perform backup
+tar -czf "$BACKUP_FILE" /path/to/source/directory
+
+# Transfer backup to remote server
+scp "$BACKUP_FILE" user@192.168.1.21:/backup/directory
+
+# Make the Script Executable:Make the script executable:
+chmod +x backup.sh
+
+# Test the Script:Before scheduling it, test the script to ensure it works as expected:
+
+./backup.sh
+
+# Set up the Cron Job:Now, you can schedule the script to run daily using cron:
+crontab -e
+
+
+# Add the following line to the crontab file to run the backup script every day at a specific time (for example, at midnight):
+ 
+ 0 0 * * * /path/to/backup.sh
+

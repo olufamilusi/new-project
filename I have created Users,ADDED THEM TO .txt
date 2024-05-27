@@ -1,0 +1,9 @@
+I have created Users,ADDED THEM TO GROUPS and ALSO added computers
+USER MANAGEMENT, ADD USER,DELETE USERS,PASSWD RESETS,PASSWD UNLOCKS
+created OUs for security groups
+USED SECURITY GROUPS TO APPLY PERMISSIONS TO RESOURCES
+created group policies to restrict access to system resources
+used standardized naming convention for users eg joh smith as jsmith
+created groups
+used SOLARWINDS FOR MONITORING OF THE NETWORK SUCH AS BANDWIDTH, CPU, MEMORY AND OTHER METRICS
+USED LDAP FOR AUTHETICATION OF LINUX USERS

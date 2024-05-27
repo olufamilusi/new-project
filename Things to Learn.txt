@@ -1,0 +1,30 @@
+
+Docker & Kubernetes: The Practical Guide [2023 Edition]
+Mastering AWS: Featuring IAM
+Amazon AWS Cloud IAM Hands-On
+A Practical Introduction to Cloud Computing
+Build and Deploy a LAMP server on AWS
+Ultimate AWS Certified Solutions Architect Associate SAA-C03
+
+
+How to use LDAP to authenticate users
+How to use AD to authenticate users
+How to use IAM to authenticate users
+work on nfs,ntp,samba
+pre-patching and post patching
+break root password
+SAN/NAS storage mounts
+
+sendmail, and LDAP Account and Group administration (AD Integration, LDAP)
+
+
+
+I’m at a point in my career where I am ready to take on more responsibility. I love that this role has the opportunity to mentor a junior team member. I am also looking to move to a more mission-driven company, which I can see is really important to the team here.”
+
+Here are some good questions you can ask:
+
+What are your favorite aspects of working at [company]? What is the most difficult part of your day at [company]?
+How much guidance can I expect from my supervisor versus my ownership for projects?
+I read that [recent update about company]. How does that affect [the mission, the work of the engineering team, etc]?
+How much interaction do we have with other teams?
+What opportunities will I have to learn and/or teach my teammates?

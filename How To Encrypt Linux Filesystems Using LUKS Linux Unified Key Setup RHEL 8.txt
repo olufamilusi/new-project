@@ -1,0 +1,104 @@
+https://www.youtube.com/watch?v=woHtfaFDWBU
+
+LUKS ADVANTAGES AND DRAWBACKS
+==============================
+
+There are a few different reasons that  you might want to encrypt a file system; one could  be, you want to protect sensitive information while  the system is at rest state, another reason could  
+be, you do not want to individually encrypt files  and directories stored inside the file system.  
+But the file system encryption comes with its  own drawbacks, which we discussed briefly in my  
+last video, and I just linked that video on the top.  Some of the drawbacks are; it uses more resources,  
+slower performance, difficult data recovery  process etc. But if encrypting the file system is  
+your need, Linux provides tools to do so. You can  encrypt the file system during the installation 
+
+SETUP
+=====
+1. # yum install cryptsetup -y
+2. # Create a new partition that you want to encrypt with the fdisk tool and run through it, and update it in the partition table
+
+# fdisk /dev/sdb
+  partprobe /dev/sdb
+3. Lets format our disk with luks
+# luksFormat /dev/sdb1
+follow the prompt, answer YES and create a password to encrypt the partiton
+
+4. To convert the encryption into LUKS partiton
+# cryptsetup luksDump /dev/sdb1
+
+5. We need to initialize the encrypted partition and give it a name like 'encrypted'
+
+# cryptsetup luksOpen /dev/sdb1 encrypted
+
+It will ask you for the passphrase you created earlier and once entered, it creates a new block
+
+To verify, we can do 
+# ls /dev/mapper     or
+# cryptsetup -v status encrypted
+
+6. Next, we create a logical volume out of the partition
+
+# vgcreate /dev/mapper/encrypted
+# lvcreate -n encrypted_lv -L 200M vg_encrypted
+# lsblk
+# lvdisplay
+
+7. To format the filesystem with xfs
+# mkfs.xfs /dev/vg_encrypted/lv_encrypted
+
+8. Create a mount point to mount the filesystem
+# mkdir /mnt/encryptedfs
+
+9. To mount the filesystem to our mountpoint
+# mount /dev/vg_encrypted/lv_encrypted /mnt/encryptedfs
+
+To verify the mount
+# mount | grep /mnt/encrypted
+
+10. We are going to cd into the dir, create a file and write into it
+
+# Now, we are going to create a dir inside the /mnt/encryptedfs
+
+# mkdir encrypteddir
+create a file inside this dir
+# cat >encrypteddir/testfile (and write in the file)
+# ctrl +d to exit
+
+11. To make the fs persistent during the boot process, then we have to make an entry in a file called crypttab. And the format of this file is name of the LUKS  device, which is "encrypted" in our case, space physical partition, which is "/dev/sdb1", space  and the third entry is the location of the file where we would be saving our passphrase to  decrypt the file system during the boot process.  
+
+# cat > /etc/crypttab
+encrypted	/dev/sdb1	/root/enpass.txt
+
+# ctrl +d
+
+let's create that plain text file called enpass.txt where we would  be saving our passphrase, which is "linuxencrypt",
+
+11. Now we need to add this key to the  device. #cryptsetup luksAddKey /dev/sdb1 /root/enpass.txt 
+
+So now we are associating  our passphrase to the device. It will verify the passphrase so the passphrase is added to the  device. And the final step is to add an entry in "/etc/fstab" file to mount the file system during the boot  process. So by making an entry on "crypttab" file, this  entry will tell the system to initialize the  encrypted partition during the boot process, and when we supply our passphrase to verify the encryption, the next step is to auto mount the partition during the boot process and for that, we need to make an  entry to this file.
+
+12. We are going to vi into /etc/fstab and add
+
+/dev/encrypted_vg/encrypted_lv /mnt/encryptedfs xfs defaults 0 0
+
+Now the setup is done,  
+
+And we can reboot the system, and verify the  file we created is there
+
+13. To verify the mountpoint is mounted
+
+# mount | grep encrypted
+
+In this partition if you'd like, or store  any sensitive information into this partiton
+
+===========================================
+sudo yum install cryptsetup -y
+sudo cryptsetup luksFormat /dev/sdb1
+sudo cryptsetup luksOpen /dev/sdb1 encrypted
+sudo mkfs.ext4 /dev/mapper/encrypted
+
+sudo mkdir /mnt/encryptedfs
+sudo mount /dev/mapper/encrypted /mnt/encryptedfs
+
+
+
+
+

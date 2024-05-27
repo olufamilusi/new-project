@@ -1,0 +1,315 @@
+
+
+
+
+1. Make sure to create ssh Keys with ssh-keygen -t rsa on both root and user prompts
+Root prompt:
+# ssh-keygen -t rsa
+for i in 1 2 3 4 5; do ssh-copy-id node$i ; done
+Then
+for i in 1 2 3 4 5; do ssh ; done
+Do the same for user engr
+su - engr
+ssh-keygen -t rsa
+
+for i in 1 2 3 4 5 ; do ssh-copy-id; done
+
+for i in 1 2 3 4 5; do ssh ; done
+You should run these commands on both root and user prompts
+Make sure
+
+
+Step1:
+First add your managed nodes, contents server and repo server to /etc/hosts file
+vim /etc/hosts
+
+192.168.1.101 node1.example.local node1
+192.168.1.102 node2.example.local node2
+192.168.1.103 node3.example.local node3
+192.168.1.104 node4.example.local node4
+192.168.1.105 node5.example.local node5
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+Not: In the exam, you dont need to fill out or add nodes /etc/hosts files on control
+node and you also dont need to create ssh-keys on root and user prompts on control node
+BUT YOU HAVE TO CHECK content of vim /etc/hosts on control node to make sure that nodes
+are added in it and you HAVE TO CHECK that control node can access to managed nodes with
+auto ssh from both root (#) and user ($) prompts with for i in 1 2 3 4 5; do ssh; done
+
+STEP2:
+IN YOUR LAB ENVIRONMENT
+In control node root prompt:
+
+adduser engr on control node
+echo 1234 | passwd --stdin engr (1234 is password of engr user)
+echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr"
+
+# ssh-keygen -t rsa
+# for i in 1 2 3 4 5; do ssh-copy-id node$i; done
+# for i in 1 2 3 4 5; do ssh node$i; done
+
+create engr user on managed nodes. You dont need to connect to managed nodes to create users.
+when you run below commands on control node, you create engr users on managed nodes.
+# for i in 1 2 3 4 5; do ssh node$i 'adduser engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'echo 1234 | passwd --stdin engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'cat /etc/sudoers.d/engr''; done
+IN EXAM YOU DONT NEED TO CREATE USER LIKE ENGR. YOU DONT NEED TO CREATE SSH KEYS AND COPY THEM FROM CONTROL NODE
+TO MANAGED NODES.
+BUT YOU HAVE TO MAKE SURE THAT YOU RUN BELOW COMMANDS ON CONTROL NODE TO MAKE SURE THAT ENGR USER HAS ROOT PRIVILEGES
+OTHERWISE YOU HAVE PERMISSIONS ISSUES WHEN YOU RUN ANSIBLE PLAYBOOKS
+
+# echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr"
+# for i in 1 2 3 4 5; do ssh node$i 'echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'cat /etc/sudoers.d/engr''; done
+
+STEP3:
+In control node user prompt:
+su - engr
+$ ssh-keygen -t rsa
+$ for i in 1 2 3 4 5; do ssh-copy-id node$i; done
+$ for i in 1 2 3 4 5; do ssh node$i; done
+
+
+
+
+İn contro node add managed nodes, repo and content server to /etc/hosts file
+
+İn exam it ask u to get some file from content server with wget
+Olu Familusi sent the following message at 11:19 PM
+
+In exam it asks you to get secret file from content server with wget and rekey it
+
+
+For your lab yıu can give users to 1234 
+this command does it
+# for i in 1 2 3 4 5; do ssh node$i 'echo 1234 | passwd --stdin engr'; done 
+on control node
+this command set 1234 password for engr user for all managed nodes
+in exam you dont need to do these stsps you do this in your lab environment
+
+
+take also this information as note for content server
+you see there are so many information that you need to learn
+
+I try to help you maybe you will have a new career path after you pass rhce
+then you help other people
+In my country nobody helped me. People are very selfish here
+
+Here I have to struggle my own like panther to learn everthing and find my way
+
+
+
+Download
+
+the answer I gave you includes all these questions
+now you should postpone your exam for 1,5 months and work very hard
+
+I used this source
+It is enough for u
+You will have similar questions in the exam
+
+but there might be some different exams
+Work my answers and my notes together
+You should work all information that I gave you
+
+install virtual box
+on virtual box create node1, node2, node3, node4, node5, classroom, and rghls nodes
+
+the answers in the sample questions document that I gave you few mins ago are wrong so use my answers for those questions
+
+Ok. The one in the PDF is the one i would be working with now since tht has both questions and answers
+
+that is the reason I wrote correct ansible YAML files as they were wrong in the questions document
+the answers in the PDF is wrong due to wrongly written YAML syntax. use my answers instead
+I see a lot of wrong answers on the different websites i visit for questions. The same playbook they wrote and then i copy it and it doesnt work
+
+match questions in the PDF with my answers
+
+
+
+you should install virtualboz and creare this nodes on virtualbox
+192.168.1.101 node1.example.local node1
+192.168.1.102 node2.example.local node2
+192.168.1.103 node3.example.local node3
+192.168.1.104 node4.example.local node4
+192.168.1.105 node5.example.local node5
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+
+---
+- name: add repos
+hosts: all
+become: true
+
+tasks:
+- name: add BaseOS repo
+yum_repository:
+name: BaseOS
+description: "CentOS8 BaseOS"
+baseurl: http://rhgls.example.local/repo/BaseOS/
+gpgcheck: yes
+gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+enabled: yes
+
+- name: add App Stream
+yum_repository:
+name: AppStream
+description: "CentOS8 AppStream"
+baseurl: http://rhgls.example.local/repo/AppStream/
+gpgcheck: yes
+gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+enabled: yes
+
+Yea def....Content file and Repo file...Ok
+
+create a repo server on it
+download centos8 on it
+create mount point and connect centos8 iso to this mount point
+
+in exam you dont have internet connection. you have to set repo with ansible playbook
+
+but for that you have to create repo server where your centos8 iso is mounted to mount point
+two things are important
+
+1. if you dont setup ansible environment correctly
+2. if you dont setup repository for managed nodes
+you cant pass the exam
+
+you need to guarentee these two first
+
+you cant even pass the exam if you dont setup ansible environment correctly and setup repositories such as BaseOS and AppStream no matter you wrote all ansible playbooks correctly
+
+two weeks before your exam lets do hangout session. you take exam and I will monitor your screen like proctor to make sure that you answer questions in time. You do second lab in the pdf that i gave you
+but you should postpone your exam
+you are not ready for exam
+this way i tell you your mistakes
+you will know your weaknesses
+
+My recommendation postpone your exam 8 weeks
+work very hard on the asnswer, pdf, and information for 6 weeks
+two weeks before the exam, lets do together a hangout session
+and you will take the exam according according to lab2 session
+from the pdf I gave you
+
+This way I will tell you your weaknesses plus I will give you
+some other information that you have to apply them on your lab environment
+that you will use for sample exam
+can we make hangout session now
+I wan to tell you few things
+
+
+
+[dev]
+node1
+
+[test]
+node2
+
+[prod]
+node3
+node4
+
+[balancers]
+node5
+
+[webservers:children]
+prod
+[defaults]
+inventory=./inventory
+roles_path=./roles
+collections_path=./mycollections
+remote_user=catherine
+host_key_checking=false
+
+[privilege_escalation]
+become=true
+become_user=root
+become_method=sudo
+become_ask_pass=false
+pwd
+/home/eng
+mkdir -p ansibl/roles
+mkdir -p ansible/mycollections
+
+{%for host in groups['all']%}
+{{hostvars[host]['ansible_default_ipv4']['address']}} {{hostvars[host]['ansible_fqdn']}} {{hostvars[host]['ansible_hostname']}}
+{%endfor%}
+STEP1:
+
+First add your managed nodes, contents server and repo server to /etc/hosts file
+vim /etc/hosts
+
+192.168.1.101 node1.example.local node1
+192.168.1.102 node2.example.local node2
+192.168.1.103 node3.example.local node3
+192.168.1.104 node4.example.local node4
+192.168.1.105 node5.example.local node5
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+Note: In the exam, you dont need to fill out or add nodes /etc/hosts files on control
+node and you also dont need to create ssh-keys on root and user prompts on control node
+BUT YOU HAVE TO CHECK content of vim /etc/hosts on control node to make sure that nodes
+are added in it and you HAVE TO CHECK that control node can access to managed nodes with
+auto ssh from both root (#) and user ($) prompts with for i in 1 2 3 4 5; do ssh; done
+
+STEP2:
+IN YOUR LAB ENVIRONMENT
+In control node root prompt:
+
+adduser engr on control node
+echo 1234 | passwd --stdin engr (1234 is password of engr user)
+echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr"
+
+# ssh-keygen -t rsa
+# for i in 1 2 3 4 5; do ssh-copy-id node$i; done
+# for i in 1 2 3 4 5; do ssh node$i; done
+
+create engr user on managed nodes. You dont need to connect to managed nodes to create users.
+when you run below commands on control node, you create engr users on managed nodes.
+# for i in 1 2 3 4 5; do ssh node$i 'adduser engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'echo 1234 | passwd --stdin engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'cat /etc/sudoers.d/engr''; done
+IN EXAM YOU DONT NEED TO CREATE USER LIKE ENGR. YOU DONT NEED TO CREATE SSH KEYS AND COPY THEM FROM CONTROL NODE
+TO MANAGED NODES.
+BUT YOU HAVE TO MAKE SURE THAT YOU RUN BELOW COMMANDS ON CONTROL NODE TO MAKE SURE THAT ENGR USER HAS ROOT PRIVILEGES
+OTHERWISE YOU HAVE PERMISSIONS ISSUES WHEN YOU RUN ANSIBLE PLAYBOOKS
+
+# echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr"
+# for i in 1 2 3 4 5; do ssh node$i 'echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'cat /etc/sudoers.d/engr''; done
+
+STEP3:
+In control node user prompt:
+su - engr
+$ ssh-keygen -t rsa
+$ for i in 1 2 3 4 5; do ssh-copy-id node$i; done
+$ for i in 1 2 3 4 5; do ssh node$i; done
+
+Time is important brother
+We try to crack the exam to finish on time
+We should go to the target with the least effort path !
+
+1. Understanding the question
+2. Writing the correct ansible playbook yaml file
+3. Runnung it with --syntax-check
+4. Making the necessary check after running the ansible playbook
+These four things are very important !
+
+We will go through all of thesr 4 steps for each question in the lab
+For each questions in PDF and some other questions outside coverage of PDF
+
+Try to insrall centos8 nodes today
+Just install
+Do nothing special on them
+
+Add node5 1 GB and 2 GB size 2 disks
+Dont update nodes after install them
+We will do everthing together
+Just install 7 nodes that i said u
+
+

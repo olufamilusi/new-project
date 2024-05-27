@@ -1,0 +1,49 @@
+Dear Hiring Manager,
+
+I am writing to express my interest in the Systems Engineer position at Signet Jewelers, as advertised. With my extensive experience as a Linux Systems Administrator and a proven track record of managing, designing, and implementing server infrastructure operations, I am confident in my ability to contribute effectively to your team.
+
+In my recent role as a Linux System Administrator at Encompass Health, I led the build, maintenance, and deployment of RHEL systems in a virtualized environment. I have a strong background in security enforcement, including creating and managing user accounts, implementing password aging, and configuring firewalls to ensure system integrity and compliance. My expertise in automation, demonstrated through the use of Ansible playbooks for configuration management and patching, has significantly improved operational efficiency and reduced downtime.
+
+I am proficient in system monitoring, troubleshooting, and performance tuning, and have experience with a wide range of technologies, including Apache web servers, NFS, Samba, and data migration tools such as RSYNC and SCP. Additionally, my experience with cloud platforms, including AWS, positions me well to support Signet Jewelers' digital transformation initiatives.
+
+My commitment to professional development is reflected in my RedHat certifications, including RedHat Certified System Administrator (RHCSA) and RedHat Certified Engineer (RHCE). I am passionate about technology and continuously seek opportunities to expand my knowledge and skills through online courses and self-directed learning.
+
+I am excited about the opportunity to contribute to Signet Jewelers' mission of inspiring and celebrating life's most meaningful moments through innovative technology solutions. I am confident that my experience, skills, and dedication to excellence make me a strong fit for the Systems Engineer role.
+
+Thank you for considering my application. I look forward to the opportunity to discuss how my background and expertise align with the needs of your team. Please find attached my resume for your review. I am available for an interview at your earliest convenience.
+
+Sincerely,
+
+[
+
+Your Name]
+
+[Your Name]
+[Your Address]
+[City, State, Zip Code]
+[Your Email Address]
+[Your Phone Number]
+[LinkedIn Profile (Optional)]
+
+[Date]
+
+Hiring Manager
+Signet Jewelers
+[Company Address]
+[City, State, Zip Code]
+
+Dear Hiring Manager,
+
+I am writing to express my interest in the Systems Engineer position at Signet Jewelers, as advertised. With my extensive experience as a Linux Systems Administrator and a proven track record of managing, designing, and implementing server infrastructure operations, I am confident in my ability to contribute effectively to your team.
+
+In my recent role as a Linux System Administrator at Encompass Health, I led the build, maintenance, and deployment of RHEL systems in a virtualized environment. I have a strong background in security enforcement, including creating and managing user accounts, implementing password aging, and configuring firewalls to ensure system integrity and compliance. My expertise in automation, demonstrated through the use of Ansible playbooks for configuration management and patching, has significantly improved operational efficiency and reduced downtime.
+
+I am proficient in system monitoring, troubleshooting, and performance tuning, and have experience with a wide range of technologies, including Apache web servers, NFS, Samba, and data migration tools such as RSYNC and SCP. Additionally, my experience with cloud platforms, including AWS, positions me well to support Signet Jewelers' digital transformation initiatives.
+
+My commitment to professional development is reflected in my RedHat certifications, including RedHat Certified System Administrator (RHCSA) and RedHat Certified Engineer (RHCE). I am passionate about technology and continuously seek opportunities to expand my knowledge and skills through online courses and self-directed learning.
+
+I am excited about the opportunity to contribute to Signet Jewelers' mission of inspiring and celebrating life's most meaningful moments through innovative technology solutions. I am confident that my experience, skills, and dedication to excellence make me a strong fit for the Systems Engineer role.
+
+Thank you for considering my application. I look forward to the opportunity to discuss how my background and expertise align with the needs of your team. Please find attached my resume for your review. I am available for an interview at your earliest convenience.
+
+Sincerely,

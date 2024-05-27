@@ -1,0 +1,68 @@
+Archiving and Compression
+=========================
+NOTE: Create the archive
+      Compress the archive
+
+How to back up multiple directories into one file.
+# tar -cvf mybackup.tar /opt/test /opt/mydoc /etc/mydir /var/mylogs /srv/document
+
+
+How to archive and compress directories in one single command using gzip and into one file.
+
+# tar -cvzf mybackup.gz /opt/test /opt/mydoc /etc/mydir /var/mylogs /srv/document
+
+z syntax: Represents gzip and the extension .gz
+
+
+How to archive and compress directories in one single command using bzip2 and into one file.
+
+# tar -cvjf mybackup.bz2 /opt/test /opt/mydoc /etc/mydir /var/mylogs /srv/document
+
+bz2 syntax: Represents bzip2 and the extension .bz2
+
+How to uncompress directories in one single command using gzip and into one file.
+
+# tar -xvzf mybackup.gz 
+
+z syntax: Represents gzip and the extension .gz
+
+
+
+
+
+How to read the contents of a tarred file
+
+# tar -tf mybackup.tar
+
+How to extract the contents of a tar file
+
+# tar -xvf /root/mybackup.tar
+
+How to check the size of a directory
+# du -sh /etc
+
+How to compress a directory
+# zip -r varbackup.zip /var
+
+To compress this file
+# gzip varbackup.tar
+
+To unzip the file
+
+# gunzip varbackup.tar.gz
+
+To compress with bzip
+# bzip2 varbackup.tar
+
+To uncompress the file
+bunzip2 varbackup.tar
+
+To compress a file
+# gzip anaconda-ks.cfg
+
+To read a g-zipped file
+# zcat anaconda-ks.cfg.gz
+
+To show you the details and type of a file, we use the file command
+
+# file anaconda-ks.cfg.gz

@@ -1,0 +1,5 @@
+https://www.techtarget.com/searchenterprisedesktop/tip/3-crucial-Linux-patch-management-best-practices-for-IT
+
+https://www.redhat.com/sysadmin/revert-patch-gone-wrong  --WHEN patching goes wrong and you want to revert back to your old kernel
+
+https://www.youtube.com/watch?v=3g-e3wQbjTU --VMWARE HARDRIVES TYPES/ADMINISTRATION/VMWARE ON THE JOB

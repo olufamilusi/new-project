@@ -1,0 +1,13 @@
+command to check the current status of SELinux and see if it's enforcing, permissive, or disabled:
+
+# sestatus
+
+SELinux Audit Logs:
+# /var/log/audit/audit.log
+# ausearch -m avc -ts recent   # View recent SELinux denials
+
+Check Apache Error Logs for any SELinux-related errors or warnings. SELinux denials related to Apache will often be logged here
+
+# /var/log/httpd/error_log  rhel version
+# /var/log/apache2/error.log  Ubuntu version
+

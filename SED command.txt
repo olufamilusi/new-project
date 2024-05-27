@@ -1,0 +1,52 @@
+=============
+SED command
+=============
+
+=> SED stands for stream editor
+
+=> SED is used to process the data (substitute,delete,insert)
+
+=> Using SED command we can perform operations on the file without opening the file.
+
+=> SED is very powerful command in linux
+
+
+# Replace first occurance of 'java' with 'python' in every line
+$ sed 's/java/python/' f1.txt
+
+# Replace second occurance of 'java' with 'python' in every line
+$ sed 's/java/python/2' f1.txt
+
+# Replace all occurances of 'java' with 'python' in every line
+$ sed 's/java/python/g' f1.txt
+
+
+# Substitute and save changes in original file
+$ sed -i 's/java/python/g' f1.txt
+
+# Delete 4th line in file
+$ sed -i '4d' f1.txt
+
+# Delete last line of file
+$ sed -i '$d' f1.txt
+
+# Delete from nth line to till last line
+$ sed -i 'n,$d' f1.txt
+
+# Delete from 2nd line to 10th line
+$ sed '2,10d' java.txt
+
+# print all lines which contains 'python' keyword
+$ sed '/python/p' ashokit.txt
+
+# delete all lines which contains 'python' keyword
+$ sed '/python/d' ashokit.txt
+
+# print data from 3rd line to 6th line
+$ sed -n '3,6p' ashokit.txt
+
+# insert data before 4th line
+$ sed '4i\i am from ashokit' ashokit.txt
+
+# Add given text after last line
+$ sed '$a\i love linux' ashokit.txt

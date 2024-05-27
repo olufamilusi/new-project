@@ -1,0 +1,138 @@
+How to configure a local and httpd remote repository in CLI(Same Server).
+=======================================================================
+Remote Server: IP ADDR: 192.168.1.61 (REMEMBER TO TAKE SNAPSHOTS FOR BACKUP)
+=========================================
+1. Install rhel9 iso
+2. Do blkid to see your mounted dvd iso
+3. You would see /dev/sr0
+4. Create a new directory to mount the iso file
+5. mkdir /rhel9-data
+6. mount the iso to the new directory to view the files
+7. mount /dev/sr0 /rhel9-data
+8. cd into the /rhel9-data directory to view files; # ls
+9. cd into /etc/yum.repos.d/ to create new file and enter below config
+
+# vi local.repo
+
+[AppStream]
+name="RedHat AppStream Repo"
+baseurl=file:///rhel9-data/AppStream/
+enabled=1
+gpgcheck=0
+
+
+[BaseOS]
+name="Redhat BaseOS Repo"
+baseurl=file:///rhel9-data/BaseOS/
+enabled=1
+gpgcheck=0
+
+
+10. Do a yum clean all to clean all cache
+11. Do a yum repolist to see your packages
+12. Do a yum list installed to view installed packages
+13. Install a package to verify its working
+14. df -h to view the mounted directory
+15. Enter details in /etc/fstab to survive a reboot
+    /dev/sr0 /rhel9-data iso9660 ro,loop 0 0
+
+
+================================================
+# yum list kernel (for CentOS 9)
+# yum list available kernel (Rhel 9)
+# yum list kernel (To show installed kernel)
+================================================
+
+How to configure a Remote yum repository in CLI
+===============================================
+Httpd yum Repo
+==============
+1.
+
+# cat /etc/yum.conf (yum config file)
+Install httpd package
+# yum install httpd (on same server that has the local repo configured)
+Start and enable the service
+
+2.
+
+# cd /var/www/html/ (And copy the files from the /rhel9-data files here)
+Note: /rhel9-data is the dir that the iso files was mounted to in above doc.
+# pwd
+# /var/www/html/
+# ln -s /rhel9-data /var/www/html/ (This copies all the files in /rhel9-data to /var/www/html/
+
+Next, cd into the yum repos directory to create a repo file there
+# cd /etc/yum.repos.d (And create a repo file there. The local.repo file that was created above should be deleted, leaving only the redhat.repo file and this new one we are creating)
+
+# vim rhel9-data.repo (And Create a repo file with this content below)
+
+[AppStream]
+name="My AppStream Repo"
+baseurl=http://192.168.1.61/rhel9-data/AppStream
+enabled=1
+gpgcheck=0
+
+[BaseOS]
+name="My BaseOS Repo"
+baseurl=http://192.168.1.61/rhel9-data/BaseOS
+enabled=1
+gpgcheck=0
+
+======
+NOTE:
+=====
+==> The baseurl address is that of this server and the http address is that of web address that enables you to connect to the /var/www/html dir to have updates online. The directory path is /var/www/html/rhel9-data/AppStream and  /var/www/html/rhel9-data/BaseOS but can also be stated in this file as http://192.168.1.61/rhel9-data/BaseOS because by default when you use http, it reads the /var/www/html location.
+
+# yum clean all   (To clean all cache)
+# yum repolist    ( To Show repo list)
+
+
+===================================
+Local / IP ADDR: 192.168.1.62
+===================================
+We are going to configure the local servers to get their updates/upgrades from the http remote server we just configured.
+
+# cd /etc/yum.repos.d/ (going into this dir to create a repo file that will get updates from the remote http-online repo)
+
+[AppStream]
+name="My AppStream Repo"
+baseurl=http://192.168.1.61/rhel9-data/AppStream
+enabled=1
+gpgcheck=0
+
+[BaseOS]
+name="My BaseOS Repo"
+baseurl=http://192.168.1.61/rhel9-data/BaseOS
+enabled=1
+gpgcheck=0
+
+====
+NOTE:
+====
+The IP Address and repo dir of the remote http-online repo above, is what would be entered in the file of this server http://192.168.1.61/rhel9-data/BaseOS to get updates/upgrades from the repo
+
+# yum clean all  (To clean cache)
+# yum repolist   (To show repo list)
+# yum update -y  (To update all packages including kernel from older version to newer version, if available)
+
+===============
+TROUBLESHOOTING
+===============
+If after patching your servers and you encounter issues with kernel upgrading properly or system not running properly, what you can do is:
+
+==> Reboot back to your old kernel
+# reboot
+On grub page, switch to old kernel from the list using tabs because by default system will boot up with the new kernel
+
+=====
+NOTE: The old kernel is left for between 15-30 days before it is deleted if the new installed kernel works good.
+=====
+
+==> To show you a list of installed Kernels on your server
+# rpm -q kernel
+
+==> To remove old kernel
+# rpm -e kernel
+
+

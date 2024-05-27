@@ -1,0 +1,8 @@
+In my environment, we do make sure that we have approval first for the patching and after the approval comes in, one of the things we also want to make sure is to finalize on how the patching is if this is a security fix, then it needs to happen right away, so that we can expedite the approval
+
+outside of that the normal flow is to make sure we patch from the dev, to qa and then eventually we go to production
+
+Talking about ansible itself, we use ansible for patching and the way we do it is that we do have playbooks that are targetted o each evviroment based on the hostgroups that we've alreaady created within the ansible playbook and then use those playbooks to do the patching. Thats pretty much what we do. We know what is required. We know what needs to be excluded so we put that into consideration then run the playbook as needed and instaances that something may have failed, we just go back and check the logs
+
+
+What are the things you target for --it depends on the distros and the modules that are required .We can either use yum or apt

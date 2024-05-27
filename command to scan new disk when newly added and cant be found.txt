@@ -1,0 +1,3 @@
+echo "- - -" > /sys/class/scsi_host/hostX/scan
+
+Replace hostX with the appropriate SCSI host. You may need to run this command for each SCSI host on your system

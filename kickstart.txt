@@ -1,0 +1,25 @@
+lang en_US
+keyboard --xlayouts='us'
+timezone America/North_Dakota/Beulah --utc
+rootpw $2b$10$.gfPUwobiL7836aWICRcw.sIWaMt3NNxC6jqFlvr6s0D4XpOoZzky --iscrypted
+reboot
+text
+url --url=ftp://192.168.1.192/rhel-repo/BaseOS
+bootloader --append="rhgb quiet crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M"
+zerombr
+clearpart --all --initlabel
+autopart
+network --bootproto=dhcp
+firstboot --disable
+selinux --enforcing
+firewall --enabled --http
+%post
+cat > /var/www/html/index.html << EOF
+Wecome to GTRYBES.NET SERVER
+EOF
+systemctl enable httpd --now
+%end
+%packages
+@^minimal-environment
+@web-server
+%end

@@ -1,0 +1,100 @@
+hakan yildirgan4:53 PM
+lvextend -l +256 /dev/ssd-vg/ssd-lv
+lvresize -rl +100%FREE /dev/vg_proxy/lv_root
+hakan yildirgan4:54 PM
+lvresize -rl +100%FREE /dev/cs/root
+hakan yildirgan4:57 PM
+resize2fs /dev/cs/root
+hakan yildirgan4:58 PM
+e2fsck -f  /dev/cs/root
+hakan yildirgan5:01 PM
+nmcli connection modify interface ipv6.method ignore && reboot
+hakan yildirgan5:06 PM
+TYPE="Ethernet"
+PROXY_METHOD="none"
+BROWSER_ONLY="no"
+BOOTPROTO="none"
+DEFROUTE="yes"
+IPV4_FAILURE_FATAL="no"
+IPV6INIT="yes"
+IPV6_AUTOCONF="yes"
+IPV6_DEFROUTE="yes"
+IPV6_FAILURE_FATAL="no"
+IPV6_ADDR_GEN_MODE="stable-privacy"
+NAME="enp1s0"
+UUID="d5f41bf4-de0a-43b3-b633-7e2ec6212e58"
+DEVICE="enp1s0"
+ONBOOT="yes"
+IPADDR=192.168.122.66
+PREFIX=24
+GATEWAY=192.168.122.1
+DNS1=192.168.122.1
+hakan yildirgan5:08 PM
+IPV6_DEFROUTE="yes"
+hakan yildirgan5:10 PM
+IPV6_DEFROUTE="yes"
+IPV6_DEFROUTE="yes"
+sudo yum install bind-utils
+hakan yildirgan5:17 PM
+PEERDNS=noPREFIX=24
+GATEWAY=192.168.122.1
+DNS1=192.168.122.1
+hakan yildirgan5:08 PM
+IPV6_DEFROUTE="yes"
+hakan yildirgan5:10 PM
+IPV6_DEFROUTE="yes"
+IPV6_DEFROUTE="yes"
+sudo yum install bind-utils
+hakan yildirgan5:17 PM
+PEERDNS=no
+hakan yildirgan5:23 PM
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+hakan yildirgan5:25 PM
+mkdir /materials
+ln -s /materials /var/www/http/materials
+hakan yildirgan5:27 PM
+semenage fcontext -a -t httpd_sys_content_t "/materials(/.*)?"
+restorecon -vR  /materials
+hakan yildirgan5:30 PM
+ln -s /materials /var/www/http/materials,
+mkdir /materials
+hakan yildirgan5:33 PM
+yum install policycoreutils-python-utils -y
+hakan yildirgan5:37 PM
+yum install policycoreutils-python-utils
+hakan yildirgan5:38 PM
+semanage fcontext --at httpd_sys_content_t "/materials(/.*)?"
+semanage fcontext - a - t httpd_sys_content_t "/materials(/.*)?"
+hakan yildirgan5:40 PM
+restorecon -vR  /materials
+restorecon -vR  /materials7
+hakan yildirgan5:53 PM
+:
+vim /etc/yum.repos.d/centos8.repo
+
+[baseos]
+name=baseos
+metadata_expire=-1
+gpgcheck=1
+enabled=1
+baseurl=http://192.168.1.207/repo/BaseOS/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+
+[appstream]
+name=appstream
+metadata_expire=-1
+gpgcheck=1
+enabled=1
+baseurl=http://192.168.1.207/repo/AppStream/
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+
+
+https://www.youtube.com/watch?v=ikol4jNyGqg&list=PLDhScTEBdP8wE9gl8PkZu5dfHSCNI0UvL ---This is kubernetes videos from Hakan(Linkedin Friend)
+
+
+
+
+
+

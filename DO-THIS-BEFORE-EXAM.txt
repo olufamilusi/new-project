@@ -1,0 +1,13 @@
+https://www.lisenet.com/2019/ansible-sample-exam-for-ex294/   --QUESTIONS FOR LISTNET
+https://jorge.fbarr.net/2021/07/20/ansible-ex294-practice-exam-and-solutions/  ANSWERS FOR LISTNET
+
+
+
+https://techinfobest.com/ansible-exam-rhce-8-full-solution-with-explanation/
+
+https://www.seimaxim.com/kb/ansible-sample-exam-questions-and-answers-for-rhce-ex294#Questions_about_cron
+
+
+WORK ON QUESTIONS 13 AND 14 ON LISTNET
+
+QUESTIONS 1-5 ON CRON ON SIEMAXIM 

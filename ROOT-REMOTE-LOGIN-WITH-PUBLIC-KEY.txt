@@ -1,0 +1,20 @@
+==================================
+How would you disallow root login?
+==================================
+# vi /etc/ssh/sshd_config
+
+And disable root login
+
+PermitRootLogin no
+
+And then restart sshd
+# systemctl restart sshd
+
+
+================================================
+How would you permit root login using public key with no password
+================
+ 
+To permit root login with no passwd but with a public key, you would have to create :
+# ssh-keygen -t rsa {on the server}
+# ssh-copy-id root@remote_server {This would copy the public key of the server to the remote server and would allow root login remotely using a public key}

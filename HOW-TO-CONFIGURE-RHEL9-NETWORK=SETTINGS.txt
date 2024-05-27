@@ -1,0 +1,269 @@
+Initial Settings
+========================
+# hostnamectl set-hostname lummy.gtrybes.net
+# nmcli device
+
+# nmcli connection modify enp1s0 ipv4.addresses 192.168.1.23/24 ipv4.gateway 192.168.1.254 ipv4.dns 8.8.8.8 ipv4.dns-search gtrybes.net ipv4.method manual connection.autoconnect  yes 
+
+# nmcli connection down enp1s0; nmcli connection up enp1s0
+# nmcli device show enp1s0
+# ip address show
+
+If you don't need IPv6, it's possible to disable it like follows.# disable IPv6
+# grubby --update-kernel ALL --args ipv6.disable=1
+
+verify kernel parameters
+# grubby --info DEFAULT
+# reboot
+# ip address show
+
+To enable or disable services, Configure like follows.
+the list of services that are active now
+# systemctl -t service
+list of all services
+systemctl list-unit-files -t service
+
+Stop and turn OFF auto-start setting for a service if you don'd need it.
+
+[root@dlp ~]# systemctl stop nis-domainname
+[root@dlp ~]# systemctl disable nis-domainname
+# to disable and stop with a command, run like follows
+[root@dlp ~]# systemctl disable --now nis-domainname
+===============================================================================
+Update System
+================
+
+# installed [yum] package
+[root@dlp ~]# rpm -q yum
+
+Update CentOS Stream Server like follows.
+[root@dlp ~]# dnf -y upgrade
+===========================================================================
+Initial Settings : Use Moduler Repository
+-----------------------------------------------------------------
+This is how to use Moduler Repository.
+[1]	Display available modules
+[root@dlp ~]# dnf module list
+[2]	For installing available modules, Configure like follows.
+# for example, display [Node.js] modules
+[root@dlp ~]# dnf module list nodejs
+# install Node.js 18
+[root@dlp ~]# dnf module -y install nodejs:18
+
+# state of [Node.js 18] turns to [e]nabled and [i]nstalled
+[root@dlp ~]# dnf module list nodejs
+[3]	If you would like to change to another version of installed module, Configure like follows.For example, Switch to Node.js 20 from Node.js 18 that was installed on [2] above
+
+[root@dlp ~]# dnf module list nodejs
+
+
+# reset first to switch
+[root@dlp ~]# dnf module -y reset nodejs
+
+
+
+# install Node.js 20
+[root@dlp ~]# dnf module -y install nodejs:20
+
+# state of [Node.js 20] turns to [e]nabled
+[root@dlp ~]# dnf module list nodejs
+
+============================================================================
+Add Additional Repositories
+=======================================
+[root@dlp ~]# dnf -y install epel-release epel-next-release
+[root@dlp ~]# vi /etc/yum.repos.d/epel.repo
+
+
+[epel]
+name=Extra Packages for Enterprise Linux $releasever - $basearch
+# It is much more secure to use the metalink, but if you wish to use a local mirr
+ror
+# place its address here.
+#baseurl=https://download.example/pub/epel/$releasever/Everything/$basearch/
+metalink=https://mirrors.fedoraproject.org/metalink?repo=epel-$releasever&arch=$$
+basearch&infra=$infra&content=$contentdir
+# [enabled=1] = repository enabled, [enabled=0] = repository disabled
+enabled=1
+# to add [priority=*], it can set priority to repository
+# it can specify [1-99], [1] is highest, default without the line is [99]
+priority=10
+gpgcheck=1
+countme=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-$releasever
+
+.....
+.....
+
+# set EPEL Next, too, for your needs
+[root@dlp ~]# vi /etc/yum.repos.d/epel-next.repo
+[epel-next]
+name=Extra Packages for Enterprise Linux $releasever - Next - $basearch
+# It is much more secure to use the metalink, but if you wish to use a local mirror
+# place its address here.
+#baseurl=https://download.example/pub/epel/next/$releasever/Everything/$basearch/
+metalink=https://mirrors.fedoraproject.org/metalink?repo=epel-next-$releasever&arch=$basearch&infra=$infra&content=$contentdir
+
+.....
+.....
+
+# if disabling with [enabled=0] regulary but want to enable it temporary, run like follows
+[root@dlp ~]# dnf --enablerepo=epel,epel-next install [Package]
+
+
+
+[2]	Add Remi's RPM repository that provides useful packages like latest PHP and so on.
+
+⇒ https://rpms.remirepo.net/
+[root@dlp ~]# dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+# included repository files
+[root@dlp ~]# rpm -ql remi-release
+# only [remi-safe] and [remi-modular] are enabled by default
+[root@dlp ~]# grep 'enabled=1' /etc/yum.repos.d/remi-*[root@dlp ~]# vi /etc/yum.repos.d/remi-safe.repo
+[remi-safe]
+name=Safe Remi's RPM repository for Enterprise Linux 9 - $basearch
+#baseurl=http://rpms.remirepo.net/enterprise/9/safe/$basearch/
+#mirrorlist=https://rpms.remirepo.net/enterprise/9/safe/$basearch/httpsmirror
+mirrorlist=http://cdn.remirepo.net/enterprise/9/safe/$basearch/mirror
+# [enabled=1] = repository enabled, [enabled=0] = repository disabled
+enabled=1
+# to add [priority=*], it can set priority to repository
+# it can specify [1-99], [1] is highest, default without the line is [99]
+priority=10
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el9
+
+.....
+.....
+
+# if disabling with [enabled=0] regulary but want to enable it temporary, run like follows
+[root@dlp ~]# dnf --enablerepo=remi-safe install [Package]
+# also possible to use Moduler Repository
+[root@dlp ~]# dnf --enablerepo=remi-modular --disablerepo=appstream module list
+
+Remi's Modular repository for Enterprise Linux 9 - x86_64
+Name      Stream   Profiles                    Summary
+composer  2 [d]    common [d]                  Dependency Manager for PHP
+memcached remi     common [d]                  High Performance, Distributed Memory Object Cache
+php       remi-7.4 common [d], devel, minimal  PHP scripting language
+php       remi-8.0 common [d], devel, minimal  PHP scripting language
+php       remi-8.1 common [d], devel, minimal  PHP scripting language
+redis     remi-5.0 common [d]                  Redis persistent key-value database
+redis     remi-6.0 common [d]                  Redis persistent key-value database
+redis     remi-6.2 common [d]                  Redis persistent key-value database
+
+
+
+==================================================================================
+Use Web Admin Console
+=============================
+Cockpit Admin Console is installed with CentOS Stream 9 Base Environment [Server] or others. It's possible to manage your CentOS Stream server on a Web browser to enable it.
+[1]	On console login prompt, as message is shown like [Activate the web console ***], it's possible to use Admin Console to enable it
+
+[root@dlp ~]# systemctl enable --now cockpit.socket
+[root@dlp ~]# ss -napt
+# Cockpit listens on 9090 port
+
+# if Firewalld is running, confirm inbound settings (generally cockpit is allowed by default)
+[root@dlp ~]# firewall-cmd --list-service
+
+# if [cockpit] is not allowed, set it to allow
+[root@dlp ~]# firewall-cmd --add-service=cockpit
+
+[2]	Access to [https://(server's hostname or IP address):9090/] with Web browser from localhost or other Client compuers, then Cockpit login form is displayed like follows. Login with a local user on your Server. (It uses root user on this example)
+==========================================================
+How to configure VIM Settings
+===============================
+[1]	Install Vim on this example.
+[root@dlp ~]# dnf -y install vim-enhanced
+
+[2]	Set command alias for your own environment.
+[root@dlp ~]# vi ~/.bashrc
+# add alias to the end
+alias vi='vim'
+# apply changes
+[root@dlp ~]# source ~/.bashrc
+
+[3]	Configure Vim for each user environment.
+You may want to select and apply each parameter according to your own preferences.
+If you like to applly settings to all users as the system wide, add the settings in [/etc/vimrc].
+[root@dlp ~]# vi ~/.vimrc
+
+" use extended function of vim
+" it is no compatible with vi
+set nocompatible
+
+" specify character encoding
+set encoding=utf-8
+
+" specify file encoding
+set fileencodings=utf-8
+
+" specify file formats
+set fileformats=unix,dos
+
+" take backup
+" opposite is [ set nobackup ]
+set backup
+
+" specify backup directory
+set backupdir=~/backup
+
+" take 50 search histories
+set history=50
+
+" ignore Case
+set ignorecase
+
+" distinct Capital if you mix it in search words
+set smartcase
+
+" highlights matched words
+" opposite is [ set nohlsearch ]
+set hlsearch
+
+" use incremental search
+" opposite is [ set noincsearch ]
+set incsearch
+
+" show line number
+" opposite is [ set nonumber ]
+set number
+
+" visualize break ( $ ) or tab ( ^I )
+set list
+
+" highlights parentheses
+set showmatch
+
+" not insert LF at the end of file
+set binary noeol
+
+" set auto indent
+" opposite is [ noautoindent ]
+set autoindent
+
+" show color display
+" opposite is [ syntax off ]
+syntax on
+
+" change colors for comments if [ syntax on ] is set
+highlight Comment ctermfg=LightCyan
+
+" wrap lines
+" opposite is [ set nowrap ]
+set wrap
+
+
+
+
+
+
+
+
+
+
+
+
+

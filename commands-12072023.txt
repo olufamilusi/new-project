@@ -1,0 +1,97 @@
+    1  ping microsoft.com
+    2  reboot
+    3  ip a
+    4  ping google.com
+    5  nmcli con show
+    6  vim /etc/sysconfig/network-scripts/ifcfg-enp0s3
+    7  yum install vim -y
+    8  ping google.com
+    9  vim /etc/sysconfig/network-scripts/ifcfg-enp0s3
+   10  hostnamectl set-hostname rhgls.example.local 
+   11  bash
+   12     12  yum update -y
+   13     13  ls
+   14     14  mkdir /repo
+   15     15  mount CentOS-Stream-8-20230704.1-x86_64-dvd1.iso /repo
+   16     16  ls
+   17     17  ls /repo
+   18     18  yum install httpd -y
+   19     19  systemctl enable --now httpd
+   20     20  systemctl status httpd
+   21     21  history
+   22  clear
+   23  ln -s /repo /var/www/html/repo
+   24  ip a
+   25  firewall-cmd --zone=public --add-service=httpd --permanent
+   26  firewall-cmd --zone=public --add-service=http --permanent
+   27  firewall-cmd --reload
+   28  firewall-cmd --list-services
+   29  systemctl restart httpd
+   30  cd /var/www/html
+   31  ls
+   32  rm repo
+   33  ls
+   34  rm repo
+   35  ls
+   36  yum install semanage -y
+   37  whereis semanage
+   38  yum install -y policycoreutils-python-utils -y
+   39  semanage fcontext -a -t httpd_sys_content_t "/repo(/.*)?"
+   40  restorecon -vR /repo
+   41  systemctl restart httpd
+   42  ln -s /repo /var/www/html/repo
+   43  clear
+   44  df -h
+   45  reboot
+   46  clear
+   47  ping google.com
+   48  wget http://repo.boun.edu.tr/centos/8-stream/isos/x86_64/CentOS-Stream-8-20230704.1-x86_64-dvd1.iso
+   49  yum install wget -y
+   50  wget http://repo.boun.edu.tr/centos/8-stream/isos/x86_64/CentOS-Stream-8-20230704.1-x86_64-dvd1.iso
+   51  ls
+   52  clear
+   53  vim
+   54  vim host.yml
+   55  clear
+   56  vim host.yml
+   57  ping google.com
+   58  nmcli con mod enp0s3 ipv4.addresses 192.168.1.207/24
+   59  systemctl restart NetworkManager
+   60  nmcli con reload enp0s3
+   61  nmcli con up enp0s3
+   62  ip a
+   63  ping google.com
+   64  clear
+   65  cat /etc/resolv.conf
+   66  vim /etc/resolv.conf
+   67  systemctl restart NetworkManager
+   68  nmcli con up enp0s3
+   69  ping google.com
+   70  vim /etc/sysconfig/network-scripts/ifcfg-enp0s3
+   71  clear
+   72  ping 192.168.1.207
+   73  yum update -y
+   74  ls
+   75  mkdir /repo
+   76  mount CentOS-Stream-8-20230704.1-x86_64-dvd1.iso /repo
+   77  ls
+   78  ls /repo
+   79  yum install httpd -y 
+   80  systemctl enable --now httpd
+   81  systemctl status httpd
+   82  history
+   83   bash
+   84  df -H
+   85  ls 
+   86  vim /etc/fstab
+   87  mount -a
+   88  df -h
+   89  reboot
+   90  df -h
+   91  history
+   92  clear
+   93  exit
+   94  ls
+   95  history
+   96  clear
+   97  history > commands-12072023.txt

@@ -1,0 +1,296 @@
+
+READ ON CRON JOBS, DEFAULT TARGET AS WELL
+
+
+1. Make sure to create ssh Keys with ssh-keygen -t rsa on both root and user prompts
+Root prompt:
+# ssh-keygen -t rsa
+for i in 1 2 3 4 5; do ssh-copy-id node$i ; done
+Then
+for i in 1 2 3 4 5; do ssh ; done
+Do the same for user engr
+su - engr
+ssh-keygen -t rsa
+Olu Familusi sent the following messages at 11:13 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:13 PM
+Morning brother. I actually did for the engr user
+But didnt do that with root...but now i know
+Hakan Yıldırğan sent the following message at 11:14 PM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  11:14 PM
+for i in 1 2 3 4 5 ; do ssh-copy-id; done
+Olu Familusi sent the following message at 11:14 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:14 PM
+I love this command!!
+So easy to use
+Hakan Yıldırğan sent the following messages at 11:15 PM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  11:15 PM
+for i in 1 2 3 4 5; do ssh ; done
+You should run these commands on both root and user prompts
+Make sure
+Olu Familusi sent the following message at 11:15 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:15 PM
+Yes I get you and i did that
+Hakan Yıldırğan sent the following message at 11:16 PM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  11:16 PM
+Vim /etc/hosts
+Olu Familusi sent the following message at 11:16 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:16 PM
+Yes i did that as well
+Hakan Yıldırğan sent the following message at 11:17 PM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  11:17 PM
+192.168.1.101 node1.example.com node1
+192.168.1.102 node2.example.local node2
+If the content in this message is unwanted or harmful, please report it to us. We won't notify the sender.
+Report
+
+Mark content safe
+Olu Familusi sent the following message at 11:17 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:17 PM
+Right
+Hakan Yıldırğan sent the following message at 11:18 PM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  11:18 PM
+İn contro node add managed nodes, repo and content server to /etc/hosts file
+Olu Familusi sent the following message at 11:18 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:18 PM
+What do you mean content server?
+Hakan Yıldırğan sent the following message at 11:19 PM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  11:19 PM
+İn exam it ask u to get some file from content server with wget
+Olu Familusi sent the following message at 11:19 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:19 PM
+And you add that to the /etc/host file??
+Hakan Yıldırğan sent the following messages at 11:19 PM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  11:19 PM
+Yes
+In exam it asks you to get secret file from content server with wget and rekey it
+Olu Familusi sent the following message at 11:20 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:20 PM
+Wow! I am learning!! I thought the only thing that is supposed to be in the /etc/hosts file is just ips and their canonical names...hmm
+Hakan Yıldırğan sent the following message at 11:20 PM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  11:20 PM
+Look these :
+Olu Familusi sent the following message at 11:21 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:21 PM
+Thank you for sharing this brother. Thank you for rooting for me
+Hakan Yıldırğan sent the following message at 11:21 PM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  11:21 PM
+Wait i will open my pc and will send you some info
+Olu Familusi sent the following message at 11:22 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:22 PM
+Ok brother
+NEW
+Hakan Yıldırğan sent the following message at 11:46 PM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  11:46 PM
+Step1:
+First add your managed nodes, contents server and repo server to /etc/hosts file
+vim /etc/hosts
+
+192.168.1.101 node1.example.local node1
+192.168.1.102 node2.example.local node2
+192.168.1.103 node3.example.local node3
+192.168.1.104 node4.example.local node4
+192.168.1.105 node5.example.local node5
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+Not: In the exam, you dont need to fill out or add nodes /etc/hosts files on control
+node and you also dont need to create ssh-keys on root and user prompts on control node
+BUT YOU HAVE TO CHECK content of vim /etc/hosts on control node to make sure that nodes
+are added in it and you HAVE TO CHECK that control node can access to managed nodes with
+auto ssh from both root (#) and user ($) prompts with for i in 1 2 3 4 5; do ssh; done
+
+STEP2:
+IN YOUR LAB ENVIRONMENT
+In control node root prompt:
+
+adduser engr on control node
+echo 1234 | passwd --stdin engr (1234 is password of engr user)
+echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr"
+
+# ssh-keygen -t rsa
+# for i in 1 2 3 4 5; do ssh-copy-id node$i; done
+# for i in 1 2 3 4 5; do ssh node$i; done
+
+create engr user on managed nodes. You dont need to connect to managed nodes to create users.
+when you run below commands on control node, you create engr users on managed nodes.
+# for i in 1 2 3 4 5; do ssh node$i 'adduser engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'echo 1234 | passwd --stdin engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'cat /etc/sudoers.d/engr''; done
+IN EXAM YOU DONT NEED TO CREATE USER LIKE ENGR. YOU DONT NEED TO CREATE SSH KEYS AND COPY THEM FROM CONTROL NODE
+TO MANAGED NODES.
+BUT YOU HAVE TO MAKE SURE THAT YOU RUN BELOW COMMANDS ON CONTROL NODE TO MAKE SURE THAT ENGR USER HAS ROOT PRIVILEGES
+OTHERWISE YOU HAVE PERMISSIONS ISSUES WHEN YOU RUN ANSIBLE PLAYBOOKS
+
+# echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr"
+# for i in 1 2 3 4 5; do ssh node$i 'echo "engr ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/engr'; done
+# for i in 1 2 3 4 5; do ssh node$i 'cat /etc/sudoers.d/engr''; done
+
+STEP3:
+In control node user prompt:
+su - engr
+$ ssh-keygen -t rsa
+$ for i in 1 2 3 4 5; do ssh-copy-id node$i; done
+$ for i in 1 2 3 4 5; do ssh node$i; done
+If the content in this message is unwanted or harmful, please report it to us. We won't notify the sender.
+Report
+
+Mark content safe
+Seen by Hakan Yıldırğan at 11:46 PM.
+Olu Familusi sent the following messages at 11:49 PM
+View Olu’s profileOlu Familusi
+Olu Familusi  11:49 PM
+Short of words brother
+View Olu’s profileOlu Familusi
+Olu Familusi  11:51 PM
+One thing i observed tho is that, the user password on the nodes isnt added here... Are you supposed to use the sha512 to generate the password and then input it in this for i statement ....or just ssh into individual nodes to input the password
+
+
+in exam 
+1. you dont need to fill out /etc/hosts on control node
+2. you dont need to create ssh keys on both root and user prompts on control node and  copy them from control nodes and managed nodes
+but YOU HAVE TO CHECK
+if content of /etc/hosts something like that
+192.168.1.101 node1.example.local node1
+192.168.1.102 node2.example.local node2
+192.168.1.103 node3.example.local node3
+192.168.1.104 node4.example.local node4
+192.168.1.105 node5.example.local node5
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+2. if there is a ssh connection from control node to managed nodes for both root and user prompts
+
+root prompt:
+# for i in 1 2 3 4 5; do ssh; done
+
+for user prompt:
+su - engr 
+$  for i in 1 2 3 4 5; do ssh; done
+
+classroom.example.local is your content server
+in exam, you might be asked to download secret.yml from content server and rekey it with ansible vault
+
+something like that:
+
+wget http://classroom.example.local classroom/materials/secret.yml
+ls
+ansible-vault rekey secret.yml
+enter current password
+enter new password
+re-enter your new password
+
+
+
+
+cat /etc/hosts
+
+192.168.1.101 node1.example.local node1
+192.168.1.102 node2.example.local node2
+192.168.1.103 node3.example.local node3
+192.168.1.104 node4.example.local node4
+192.168.1.105 node5.example.local node5
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+
+here rhgls.example.local, for example, is a repo server
+from where nodes install updates and packages
+
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+These two nodes should be on all managed nodes
+you can add them after you set your ansible envrionment
+
+by going to each node for example
+# ssh node1 and add
+vim /etc/hosts
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+# ssh node2 and add
+vim /etc/hosts
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+# ssh node3 and add
+vim /etc/hosts
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+# ssh node4 and add
+vim /etc/hosts
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+# ssh node4 and add
+vim /etc/hosts
+192.168.1.106 classroom.example.local classroom
+192.168.1.107 rhgls.example.local rhgls
+
+you should also make sure that ssh is allowed on managed nodes by using below command to check it
+firewall-cmd --list-services
+
+
+---
+- name: add repos
+hosts: all
+become: true
+
+tasks:
+- name: add BaseOS repo
+yum_repository:
+name: BaseOS
+description: "CentOS8 BaseOS"
+baseurl:  
+gpgcheck: yes
+gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+enabled: yes
+
+- name: add App Stream
+yum_repository:
+name: AppStream
+description: "CentOS8 AppStream"
+baseurl: http://rhgls.example.local/repo/AppStream/
+gpgcheck: yes
+gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+enabled: yes
+
+
+create a repo server on it
+download centos8 on it
+create mount point and connect centos8 iso to this mount point
+
+
+in exam you dont have internet connection. you have to set repo with ansible playbook
+Olu Familusi sent the following message at 12:47 AM
+View Olu’s profileOlu Familusi
+Olu Familusi  12:47 AM
+Ok just like the rhcsa exam too
+Hakan Yıldırğan sent the following messages at 12:47 AM
+View Hakan’s profileHakan Yıldırğan
+Hakan Yıldırğan  12:47 AM
+but for that you have to create repo server where your centos8 iso is mounted to mount point
+
+
+

@@ -1,0 +1,31 @@
+Linux System Administrator
+•	Experience in the build, maintenance, administration, and deployment of RHEL Systems according to existing standards in a virtualized environment to the network.
+•	Administer user account creation of users, groups on Windows systems and Linux System, configure their user profiles, grant privileges, and troubleshoot password resets and recoveries using Active Directory and Identity Access Management (IAM) platform.
+•	Experience with the installation, configuration and management of file system management using Logical Volume manager.
+•	Use VMware to create and manage virtual servers using virtualization tools as (VMware ESXI, Oracle VirtualBox).
+•	Perform patching by using ansible and through command line using YUM.
+•	Manage and write Ansible playbooks, adhoc commands to perform various administrative tasks and automated scripts.  
+•	Manage package installation using the RPM tools.
+•	Engage in system monitoring including troubleshooting of network issues and performance.
+•	Create configure and troubleshoot file shares such as NFS, Samba.
+•	Configure Firewalls and add/remove ports.
+•	Configure log rotation and retention parameters on critical system enterprise wide per policy.
+•	Perform system backup, database backup and restore.
+•	Perform regular health checks of systems to find out why file system thresholds are being passed and develop a strategy to fix per standard operation procedure (SOP).
+•	Provide technical and after-hours support 24/7 when required.
+
+University of Southern California, Ca.   Jan 2018 – Apr 2020
+Linux System / Windows Administrator
+•	Installed, configured, and maintained Windows and Linux operating systems in physical and virtual environments.
+•	Engaged in user file permission management including assigning, adding, and updating permissions at the file and directory level.
+•	Assisted in the provision of accounts, groups, and assignment of accounts to groups.
+•	Managed, monitored and test individual and group user access privileges and security configurations.
+•	Managed, installed, and upgraded software packages using YUM and RPM.
+•	Experience with Logical Volume management (LVM), analyzing creation and usage of disks.
+•	Kept the system secure by monitoring user activity through secure log messages and creation of tools such as who and last.
+•	Installed, configured, and managed Apache (HTTPD) on Linux production servers.
+•	Utilized Active Directory to add, remove users, unlock accounts, and reset passwords.
+•	Participate in weekly team meetings as required for project status, escalation, or issue resolutions to ensure project deliverables are met.
+•	Performed business as usual network tasks such as system setup and help desk functions.
+
+likely questions and answers from this resume

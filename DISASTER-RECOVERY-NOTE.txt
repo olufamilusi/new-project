@@ -1,0 +1,244 @@
+https://www.youtube.com/watch?v=0H40e-Mbsd8
+
+Disaster Recorvery data center is where all the applications of a company is hosted for business continuity. The purpose of disaster recovery is that in case of any disaster in your primary data center your applications should continue to work from the disaster recovery so you can say it is a parallel Data Center and we refer to it as a DR because we use it in case of any disaster in your primary data center now the disaster could be anything, it could be a natural disaster or it could be a man-made mistakes/human mistakes, so in a nutshell you can say that if your data center gets crashed due to any reason, your application should be accessible from the Dr that means from the disaster recovery center so as I said it is a parallel data center so what exactly we need is the complete setup of hardware and application in the Dr as well as whatever we have in the DC to minimize the cost most of the time. In case of any disaster in your DC your application should be accessible from the Dr to ensure that your Dr is working perfectly all the time and your data from the primary data center is getting synced in your Dr. The client does the Dr testing regularly and this is based on the policy of some organization, that is testing if everything is okay
+
+
+Processes we follow during the drills and how we can do the setup of drills, configurations of your application for the Dr testing
+==================================================================================================================================
+
+Let us first start with the basic architecture of our data center and then Dr. Suppose that you have two data centers, the first one is in India and second is in U.S athe primary data center is in India and then the second data center in U.S is called the secondary data center which you can refer to as the Disaster Recovery, or sometime it is referred to as standby. You will have some softwares and Hardware in your primary data center, similarly you will have a certain set of hardware and softwares in your data center in the primary or secondary data center which is also called the Dr as well, capacity as I said again is based on the requirements of the clients. It could be half of your DC or it could be full as well, just replication of your DC. 
+
+How we access the application
+=============================
+
+Suppose that we are accessing an application, google.com so whenever a user hit the first request, it goes to your DNS server and what is the purpose of DNS server? It is to resolve your DNS to the IP address so, here what we are accessing is google.com, so google.com is a DNS, it's not an IP so whenever you hit in the browser your browser contacts the DNS server for resolving this DNS to the corresponding IP. In our case, suppose that it is a load balancer IP of your primary data center, you can directly access the website using IP address as well, if it is allowed but this is not a recommended approach because it's not feasible for you to remember the IP address of each and every website that you access over the internet and that's why we have the DNS server in between where we get the user friendly DNS name for our application so most of the time directly accessing with the help of IP address is not allowed so whenever you access any website, the request goes to DNS and from DNS it resolves to IP address and then from IP address the requests come inside to a data center where you have applications running on the different servers and the same structure we have the Dr as well, now our data center primary data center is getting updated each and every day each and every hour and second and that means some business transactions or data is Flowing, your configurations update and everything is going in your primary data center and Dr. What I have said is that, in case of any disaster so that means whatever the data that we have that you have in your primary data center, whatever the data that you are getting in your primary data center, whatever the updates of the softwares applications you are performing in your data center, whatever the data that is getting updated in your database, it has to be replicated at the real time in your Dr as well right so you have two part, one is you have a software and the second part is the database, so when we do the replication of our software part then we say it as an empty sync, middle tier sync and when we do the replication of data it is called database C so there are
+different Technologies and softwares are available for the DBC between DC and Dr and in DC we have the multiple host so they have a corresponding host names, similarly in the Dr you have multiple hosts and they have their own corresponding host name and the same is applicable for your database server IPs as well so when the Dr is applicable then your data center get crashed then we initiate the Dr testing, now there are certain
+question that has been arrived from this structure and that we do take care during the Dr Drills the first one is Mt
+and DB servers have been different hostname and IPS so the software that we have
+configured in our primary data center they have a different servers and they have a different host names and when we
+install the softwares we Define either the hostname or IP address in our configuration files for the
+softwares one of the softwares and configurations so now here if we are saying that our complete data is
+getting replicated from primary data center to your Dr but if my applications from the primary data
+centers are getting replicated in my Dr there you have a different hostname for the servers then how your application
+will going to work suppose that you have an application server like weblogic is running and you have some deployed some
+applications there and in the web logic you have a listen address for your admin server managed server node managers and
+you have defined the hostname of the private Data Center and the same configuration file same complete setup
+of your middle tier you have copied to your Dr right the how we are going to handle the situation how we are going to replace
+the hostname of your Dr servers in the configuration
+files so there is a certain technique to handle that during the testing I will explain that one and second my DNS is
+pointing to primary database data center lb IP right so as I said that whenever
+we hit the request it goes to DNS from DNS it moved to load balancer IP and then from loader IP it moved to inside
+to your data center so now in second case my DNS is pointing to primary data
+center load balancer that means if I have a data center like Dr I would have
+a one more load balancer which is there in the Dr region right because there are two different data centers so we
+configure that in a different region okay so in that case I will have a different load balancer in the Dr region
+so in case suppose that we have certain some kind of a disaster where I am saying that DC is completely down that
+means your load balancer is also not working there right so what we'll do in that case
+in that case we will just re-point our DNS server to the IP address of my Dr
+load balancer right so my all the applications will be accessible from the TR
+right and then my DNS instead of pointing to the load balancer for DC it will point to the load balancer IP of my
+Dr but still the question that is Oman open how you we are going to manage for
+how we are going to change the hostname entries of our in our configuration files in the Dr softwares in
+configuration files right so now when we talk about the Dr testing power
+at the load Rancor level then we have a different approach for that that we will discuss in the next few slides so now
+question two is resolved how we are going to scale over our DNS we have to
+point or you can say we have to repoint our DNS server to the load balancer IPO over Dr right but the still question one
+is open how we are going to change the host name entries for MTN DB right and
+the third question could be how to sync MTN DB right and what is the action plan for Dr
+Drill and testing okay so how do you test question one why I'm saying that we have a different set of servers in DC
+and Dr and where we are replicating our complete software and configuration files from DC to Dr and how we are going
+to change the hostname entries the first one is just run the search and replace
+command in your Dr servers where you have to replace the each and every host name which is matching to your DC with
+the host name of your Dr you have to run this search and replace in in the complete softwares right in the Dr yet
+but that is a bit complicated and not feasible every time you are doing a Dr testing you you have a big size of your
+hard softwares and binaries and every time you are running the search and replace it's not a feasible position
+second option is the host file mapping of TR servers that we do most of the time doing the drills testing
+now what does it mean whenever we hit any
+URL from our browser it goes for the DNA server right
+now if we defined the host name and DNS entry in our
+localhost file then our localhost file is the first DNS server where our
+browser reach so what does it mean in the previous slide I explained that
+if I am going to access the google.com it will hit the DNS server from DNA server it will resolve to my IP address
+offload balancer and then the request will go inside the data center if I will replace what if I will add a new entry
+in my Etc host file okay it is a host in the Linux and similarly you have a different location
+in the window so if I will add a entry for the google.com along with a dummy IP
+okay in my that file so whenever I will hit the google.com it will first try to
+resolve the IP address that I have defined in my ATC host file
+okay if there is no entry then it will definitely go to the Internet DNA server and then it will try to resolve but if I
+have defined any entry for any of the DNS corresponding to an IP in my localhost file then my localhost file
+will act as a local DNS resolver okay so what what does it mean here is
+that I said to you that in DC you have a different servers which is having a different uh host names which is defined
+in your configuration files and now in Dr your challenge is to replace all the
+hostname of DC's with the Dr host names right so in localhost file of Dr what
+exactly you need to be done is this is your DC servers
+and these are your Dr servers right so the host name is different and
+the iPad is also different so what exactly we need to be done in the host file of Dr server is that
+corresponding to the host name of Dr we have to add the IP address of our Dr
+servers right so what we have done here is we have added
+the prod host and then the corresponding IPS drips why
+this because in the all the configuration files we have the DNS name of broad servers right that's why we
+have added in the host file of Dr is prod host one broad host one prod host and then corresponding to that
+that second entry is wrong in the ITC host file it should be prod host two okay this is a typo so for corresponding
+to each and every DNS or corresponding to each and every host name in our Dr host file we have added the
+corresponding IP address of the Dr server now what will happen when we will start our servers in the Dr region okay
+it will look for the DNS host names which we have defined in the configuration file which is of the production and when it will go for the
+resolving that hostname because we are now we have defined the corresponding IPS of Dr in the ATC localhost file so
+the primary server host names will resolve to the IP address of PR it's a
+very straightforward what exactly we are doing is simple we are replacing the hostname of our production with the IP
+address of Dr so what exactly we are doing is we are just updating the local host file of our each and every Dr
+server where we are adding the entries of each and every production hostname along with that corresponding mapping of
+my drips right so that means Dr host entries mapped with the DC
+IPS okay this is again wrong so what we are doing is TR host entries map to drips okay so this is again and typo
+please consider it as a DC host increased mapped with drips
+so now when we will start our services in the Dr region the corresponding host name of the
+primary data center which is there in the configuration file will be resolved at the drip okay so you don't need to
+change anything manually now more ways of load balancing testing
+lb testing okay so so far in the previous slide what we have discussed about how we can change
+the hostname entries between the DC and Dr right by the mapping of ips okay
+second case is the primary interfacing for application is
+the URL which we use to access our application okay and when we access any
+application as I said it first hit the DNA server and from DNS server it goes to the load balancer IP right so now we
+have two different regions for DC and Dr so that we have a two different corresponding load balancers in the DC
+and Dr so if we are saying that either our data center primary data center is crashed or we are doing the DC
+drills so that means in both cases our DNS should point to the Dr load balancer
+right so the first approach is with it or you can say the drawback with the generic across what we have discussed in
+the initial slide if we are changing our DNS to point from primary data center to
+secondary data center that means we have an outage for application right till that we are going to reflect or we are
+going to change the load balancer IP from primary data center to secondary data center it is an outage right we are
+pointing to load balancer i p in the different region okay and but in that
+case what will happen is in that case our production will be down for some time till we will switching the DNS okay
+so this is something that we can avoid when we especially when we are doing the Dr Drills
+okay because most of the client don't prefer to have an outage for the Dr testings okay then for that we have some
+different approach right so one of the approach of testing but is there any other way of testing without bringing
+down the production so and do we have any option apart from that one what we have discussed so far where we
+should not bring down the production application for that yes we have an option which is just like we have done
+in previous slide for the hostname mapping right where we have mapped our hostname of the production with the corresponding
+IPS of the Dr server similarly we can map
+the load balancer IPS in our localhost file right so what I said whenever we
+access any URL okay it look for it first look for the resolving at our local host
+file and if there is no entries then it will go to the your internet DNA server for to identify the corresponding IP
+right but if it will identify any of the DNS and the corresponding IP into a
+local host file then it will try to resolve that the IP address
+thanks for now application
+system so what is local system I'm not talking about the Dr server because in for any case of servers we have done the
+modification or you can say the mapping of hostname and IP in the Dr servers
+host file right but now because we are going to access that this URL from our
+local system that means our from local PC desktop laptop or mobile device or
+any device right from where we are going to access the application that means in that local system localhost file we have
+to map the DNS URL with the IP address of your Dr region
+so this is our DC load balancer IP and Dr load balancer IP right so the primary
+load balancer IP is 192.168.10.7 and the second three VR
+Road as the right is 192.168.14.8 so what we are doing is
+they are doing during the Dr Drill is we are updating our local PC
+host file where we are mapping google.com with the IP address of the Dr
+so here our Dr IP address is
+192.192.168.10.8 right so this is the mapping we have there in our Local Host files so what we what it will uh does
+whenever we are going to access the URL from our local system browser so whenever we will hit the google.com it
+will try to resolve google.com with the IP address of
+192.168.10.8 which is the Dr IP header okay so by this way we don't need to bring
+down our primary data center where in the first case we were pointing our DNS
+to the secondary Dr IP address so what we are doing here is we are not pointing our DNS server to the Dr low tensor IP
+what we are doing is we are just updating our local PC host file where we are telling that whenever our browser
+that whenever we are accessing goal.com try to resolve it to some different IP
+okay so in that case it will refer to your localhost pilot it will not go to the internal internet DNS to resolve it
+to the primary load balancer so now whenever you will access google.com it will go to Dr site so you will not have
+a production out here so these are the two cases where we can do the load balancing testing or not the load
+balancing in fact the Dr testing okay in the first case you need a production outage but in the second case you don't
+need the production outage and this is the most in use Dr Bill technique that
+we follow for most of the clients on quarterly or half yearly or yearly basis
+without breaking down the production system right so this is about the mapping of
+your host file and that DNS uh load balancer IP now the question on empty
+sync how we can do the empty thing that is Middle tier thing where we have a software running on the primary data
+center so as I said we have to replicate the content complete content or you can say the complete file system from your
+
+DC to Dr okay so Dr application should be down when DC are up and running so
+21:26
+most of the time what we do is that whenever your DC is up and running we bring down the dear application so that you can copy the content offline okay however it is running on your DC Center
+but but you can copy the content from primary DC to your secondary Dr Center and replication can be done using rsync
+storage and volume replication technique so the replication of the complete software is depend on many techniques if
+you wanted to replicate the complete file system if you wanted to replicate the complete volume of your storage or
+if you wanted to replicate only the software then for that the easy way is you can enable the r sync okay rsync is
+a technique which is a incremental basis uh technique for copying the content
+okay so these are the two things that you can use for the empty sync and when we talk about the database so
+specifically I'm talking about the case of Oracle so whenever we have a database
+in in the Dr reason it gets replicated with the data from the primary data center okay so that means when your data
+is getting replicated to your Dr database it should be in the read-only port it should not be in the read and
+write mode okay so we kept uh the database in the Dr region in the read-only mode and then we take the redo
+log files from the primary data center and we copy the redo log files to our secondary data center via data center
+and then based on the a setup of your database
+all the changes from the redo log files get replicated immediately to your Dr database
+okay so now when we talk about the different mode of read and write in the production or in the Oracle okay then
+the VR3 mode the first is the physical standby database okay so physical standby database can receive an acquire
+redo log file while it is open for read-only Access so as I said the Dr database should be in the read-only mode
+when the data get replicated so if your database is in physical standby mode it will receive the redo log files from the
+primary data center and then at the same time changes will get reflected or replicated in yours
+main Dr database from the reader log file second is logical standby database
+so what happened in logical standby Database The Logical standby database is get synchronized with the primary
+database through SQL apply with transforms the data in the radio received from the primary database into
+SQL statement so that means whenever we get the redo log file from the primary data center Center it gets change the
+content in the form of SQL statement from the real log files and then changes our get reply applied in your Dr database third is Snapshot standby
+required
+foreign
+okay so what is the difference between physical and logical and then step snapshot or if we say that what is the
+difference between snapshot and then in comparison with the physical and logically said in snapshot database the
+redo log files get we get from the DC to Dr but the changes is not getting
+replicated that means you are only receiving the redo log files but the changes are not replicated to your database okay so this is the mode that
+is required when we are doing the Dr testing right at that time when we are doing the Dr testing we have to open the database in the read write mode and we
+don't want that any data is getting uh from the DC is writing to your primary database when we are we have open it in
+the right mode Okay so when we do the Dr testing we open the
+database in the rewrite mode but before that one we have to convert it in the
+snapshot standby database why because we don't want the data at the time of testing whenever the TR database is in
+rewrite mode any changes from the DC to be applied in the Dr okay but yes that
+the file in between when you are doing the testing in the snapshot standby mode the file redo log files will get copied
+25:24
+to your database and once your testing is finished and you again change the database back to your physical standby mode it will again apply all the changes
+that it has received in between when you have done your testing okay so Dr replication can be done using Oracle
+Data Guard Oracle Golden Gate and many more in the market so when we talk about the Oracle then you have Oracle data card then you have our Oracle Golden
+Gate apart from that there are a lot of many more softwares for the applications of the data so these are the two terms
+when we talk about the empty sync and the databasing data sync okay and now when we talk about a Dr testing
+scenarios in a concluded way so we have a case one when the production is down right so what is what is the case of
+production down when we you are switching your primary data center IP to the Dr region IP okay when you're doing
+such changes at the DNS level then it is a production voltage case 2 when you are updating your local system host file
+with with the DNS name entry corresponding to the IP address of the air load balancer so in that case you
+don't need any production downtime so phase one and case two all new changes in Dr will not be replicated back to DCR
+mostly testing data what is does it mean during our testing when we are doing any
+testing in in our production or in our Dr during the testing phase it will not
+get replicated back to DC again when our testing is completed so most of
+the time 99.9 of time it is this is not required because whenever we do any reload testing in the Dr it is get
+tested with some testing data there is very rare scenario that during the testing that means you are saying that
+there is a testing we are using the live production data in the Dr and once you are Dr testing is finished and then you
+are switching back to DC whatever the data that you have inserted in the Dr during the testing it has to be
+replicated in the DC this is very rare case but yes sometime it is required so
+the percentage would be only for the point one percentage of customers but for that the strategy is completely
+different which is not part of this document it's this video okay so Dr testing action plan when we
+talk about the action plan for phase one and phase two what would be the step-by-step action plan for that one so
+the case one when we we said that it is the required production downtime because we are mapping our DNS IP from DC to Dr
+the action plan would be you have to shut down your primary data center applications break empty and DBC between
+DC and Dr so during the testing you don't want to replicate any data so you have to break the sink of MTN DB between
+dcdr then convert drdb from physical standby to snapshot send by and why what
+is the reason we have discussed in the previous slide because we don't want to write the data from the DC to Dr when we
+the database is open in right mode in that Dr and we are doing the testing then Mount and start drdb in readmat
+mode then so once your DB is converted in the snapshot standby then you have to mount and then start your database in the
+redirect mode in the Dr make sure DC hostname pointing to drips in the Dr host file right you have to map your
+corresponding hostname entries of DC with the corresponding IP of Dr then
+start the empty services and then you have to point your DNS load balancer IP to the Dr loader IP which cause an
+outage in the production till you are doing the testing and then you have to do the testing the services what is the
+case of reverting pack you have to stop the empty Services then convert your DB to again physical standbyte in the Dr
+and then revert back DNS change which is point back to dclp so once your testing
+is finished you have to point back your load balancer IP with the DC load balancer IP
+okay so this is the first case now case 2 is when we have to update
+localhost file with the Dr load balancer IP that means where we don't need any outage in the production so how we can
+perform such kind of a testing so for that the plan is break MTN DB sync between DC and Dr convert Dr again from
+physical standby to snapshot standby Mount and start the Dr in your database
+in in VR within read and write mode make sure DC hostname pointing to drips in
+the Dr host file so till this step the action plan is same as case one then
+start the services and after starting the services you have to update your local host file where you have to point
+your DNS to the corresponding IP of the Dr load balancer right and then you can
+do the testing and this is not required any downtime in production and how to revert back just stop the empty services
+in Dr convert your DB again back to physical standby enable sync MTN DB and
+you can revert back the changes whatever you have done in your localhost file because after that once you will go to
+access your production uh your DNA it will again try to point to Dr once your testing is finished okay so remove that
+entry and again after that it will your DNS URL will point to a product primary
+DC Center so this is all about the DC and Dr concept how we can perform the
+different testings and then How We sync the MTN data between DC and yeah thanks
+for watching this video

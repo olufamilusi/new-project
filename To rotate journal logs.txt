@@ -1,0 +1,27 @@
+192.168.1.200  gtrybes.net ansible-server
+192.168.1.201  gtrybes.net server1
+192.168.1.202  gtrybes.net server2
+192.168.1.203  gtrybes.net server3
+192.168.1.204  gtrybes.net server4
+192.168.1.205  gtrybes.net server5
+192.168.1.206  Ubuntu-server server6
+192.168.1.207 redhat-server server7
+
+[linux-servers]
+server1
+server2
+server3
+server4
+server5
+
+server1 --logMonitor
+server2
+
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+ansible all -m lineinfile -a "path=/etc/hosts line='192.168.1.200  gtrybes.net ansible-server
+192.168.1.201  gtrybes.net server1
+192.168.1.202  gtrybes.net server2
+192.168.1.203  gtrybes.net server3
+192.168.1.204  gtrybes.net server4
+192.168.1.205  gtrybes.net server5' insertbefore='^192.168.1.206	Ubuntu-server server6'"

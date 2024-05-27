@@ -1,0 +1,7 @@
+EX200 Red Hat Certified System Administrator
+EX294 Red Hat Certified Engineer
+EX280 Red Hat Certified OpenShift Administrator
+EX180 Red Hat Certified Specialist in Containers and Kubernetes
+EX436 Red Hat Certified Specialist in High Availability Clustering
+EX318 Red Hat Certified Specialist in Virtualization
+EX403 Red Hat Certified Specialist in Deployment and Systems Management

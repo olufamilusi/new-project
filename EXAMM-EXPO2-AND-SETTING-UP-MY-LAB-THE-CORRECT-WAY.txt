@@ -1,0 +1,140 @@
+                     INSTRUCTIONS ON HOW TO SET UP MY LAB AND EXAM ENVIRONMENT 
+Note: 
+
+In the exam, you dont need to fill out or add nodes /etc/hosts files on control
+node and you also dont need to create ssh-keys on root and user prompts on control node
+BUT YOU HAVE TO CHECK content of vim /etc/hosts on control node to make sure that nodes
+are added in it and you HAVE TO CHECK that control node can access to managed nodes with
+auto ssh from both root (#) and user ($) prompts with for i in 1 2 3 4 5; do ssh; done
+
+Note:
+
+
+1. Understanding the question
+2. Writing the correct ansible playbook yaml file
+3. Runnung it with --syntax-check
+4. Making the necessary check after running the ansible playbook
+These four things are very important !
+
+We will go through all of thesr 4 steps for each question in the lab
+For each questions in PDF and some other questions outside coverage of PDF
+
+
+
+STEP1:
+
+First add your managed nodes, contents server and repo server to /etc/hosts file
+vim /etc/hosts
+
+192.168.1.101 node1.example.local node1
+192.168.1.102 node2.example.local node2
+192.168.1.103 node3.example.local node3
+192.168.1.104 node4.example.local node4
+192.168.1.105 node5.example.local node5
+;
+
+
+
+
+STEP2:
+IN YOUR LAB ENVIRONMENT
+In control node root prompt:
+
+adduser catherine on control node
+echo 1234 | passwd --stdin catherine (ablerate is password of catherine user)
+echo "catherine ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/catherine"
+
+# ssh-keygen -t rsa
+# for i in 1 2 3 4 5; do ssh-copy-id node$i; done
+# for i in 1 2 3 4 5; do ssh node$i; done
+
+create engr user on managed nodes. You dont need to connect to managed nodes to create users.
+when you run below commands on control node, you create catherine users on managed nodes.
+# for i in 1 2 3 4 5; do ssh node$i 'adduser catherine'; done
+# for i in 1 2 3 4 5; do ssh node$i 'echo ablerate | passwd --stdin catherine'; done
+# for i in 1 2 3 4 5; do ssh node$i 'echo "catherine ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/catherine'; done
+# for i in 1 2 3 4 5; do ssh node$i 'cat /etc/sudoers.d/catherine''; done
+IN EXAM YOU DONT NEED TO CREATE USER LIKE CATHERINE. YOU DONT NEED TO CREATE SSH KEYS AND COPY THEM FROM CONTROL NODE
+TO MANAGED NODES.
+BUT YOU HAVE TO MAKE SURE THAT YOU RUN BELOW COMMANDS ON CONTROL NODE TO MAKE SURE THAT CATHERINE USER HAS ROOT PRIVILEGES
+OTHERWISE YOU HAVE PERMISSIONS ISSUES WHEN YOU RUN ANSIBLE PLAYBOOKS
+
+# echo "catherine ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/catherine"	
+# for i in 1 2 3 4 5; do ssh node$i 'echo "catherine ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/catherine'; done
+# for i in 1 2 3 4 5; do ssh node$i 'cat /etc/sudoers.d/catherine'; done
+
+STEP3:
+In control node user prompt:
+su - catherine
+$ ssh-keygen -t rsa
+$ for i in 1 2 3 4 5; do ssh-copy-id node$i; done
+$ for i in 1 2 3 4 5; do ssh node$i; done
+
+
+
+WHAT MY INVENTORY FILE SHOULD LOOK LIKE:
+
+
+[dev]
+node1
+
+[test]
+node2
+
+[prod]
+node3
+node4
+
+[balancers]
+node5
+
+[webservers:children]
+prod
+[defaults]
+inventory=./inventory
+roles_path=./roles
+collections_path=./mycollections
+remote_user=catherine
+host_key_checking=false
+
+[privilege_escalation]
+become=true
+become_user=root
+become_method=sudo
+become_ask_pass=false
+pwd
+/home/eng
+mkdir -p ansibl/roles
+mkdir -p ansible/mycollections
+
+
+WHAT MY REPOFILE PLAYBOOK SHOULD LOOK LIKE
+
+---
+- name: add repos
+hosts: all
+become: true
+
+tasks:
+  - name: add a repo server repository
+    yum_repository:
+      name: BaseOS
+      description: "BaseOS RepoServer"
+      baseurl: http://rhgls.example.local/repo/BaseOS/
+      gpgkey: http://rhgls.example.local/centos/gpgkey/RPM-GPG-KEY-centosofficial
+      gpgcheck: yes
+      enabled: yes
+
+
+  - name: add a repo server repository
+    yum_repository:
+      name: AppStream
+      description: "AppStream RepoServer"
+      baseurl: http://rhgls.example.local/repo/AppStream/
+      gpgkey: http://rhgls.example.local/centos/gpgkey/RPM-GPG-KEY-centosofficial
+      gpgcheck: yes
+      enabled: yes
+
+
+
+

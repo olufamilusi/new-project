@@ -1,0 +1,15 @@
+PROJECT
+
+how to set up highly available linux systems in a cluster with a load balancer configured with it 
+
+
+set up projects that you can explain around my job resume line by line. each line/paragraph with a project
+how to set up nodes in a cluster
+how to install and configure a dedicated haproxy/nginx load balancer to distribute incoming traffic evenly accross nodes in a cluster
+
+how to set up a redhat/pacemaker cluster suite 
+how to install and configure pacemaker to manage resources and services accross the cluster to ensure high availability
+how to test failover capabilities of your cluster to ensure it behaves as expected
+how to set up monitoring tools like nagios/zabbix/prometheus/grafana to monitor the health of your cluster nodes and services and how to configure alerts to notify you of any issues
+
+how to set up firewall rules and encryption for my application

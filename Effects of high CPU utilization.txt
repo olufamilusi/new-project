@@ -1,0 +1,18 @@
+
+High CPU utilization adversely impacts system performance in the following ways:
+
+Lag in CPU performance
+Frequent rebooting of systems
+Delay in response from application
+Overheating of CPU
+It's essential to check the CPU usage regularly to understand the cause and impact of high CPU utilization.
+
+Determining CPU utilization
+Below are some of the most popular commands used for real-time monitoring of the CPU usage in a Linux system.
+
+top Command
+The top command is used to display a real-time, dynamic view of a running system. It displays various crucial system metrics along with a set of processes that are currently being managed by the Linux kernel. It is one of the most widely used commands for tracking the CPU utilization, process statistics, and memory utilization of a Linux system.
+
+The mpstat command provides information about CPU performance and utilization by giving CPU statistics for the whole system and each available processor.
+
+Several factors contribute to high CPU usage so it’s essential to find the root cause to reduce it. This article provides three useful commands—top, mpstat, and ps to help users monitor and troubleshoot CPU related issues on Linux.

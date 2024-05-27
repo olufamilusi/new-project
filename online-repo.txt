@@ -1,0 +1,24 @@
+http://192.168.1.206:/data/AppStream
+
+---
+- name: Installing my repo server
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Repo Install
+    yum_repository:
+      name: "AppStream RepoServer"
+      baseurl: http://repo-server.gtrybes.com:/data/AppStream/
+      enabled: yes
+      gpgcheck: yes
+      gpgkey: http://repo-server.gtrybes.com/RPM-GPG-KEY-redhat-release
+
+  - name: Repo Installation
+    yum_repository:
+      name: BaseOS
+      description: "BaseOS RepoServer"
+      baseurl: http://repo-server.gtrybes.com:/data/BaseOS/
+      enabled: yes
+      gpgcheck: yes
+/etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release

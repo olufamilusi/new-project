@@ -1,0 +1,54 @@
+sed command :
+
+The sed command, short for Stream EDitor, is a powerful tool used in Unix and Unix-like operating systems for parsing and transforming text. It operates by processing text line by line and applying specified operations. The syntax of a sed command generally follows this pattern:
+
+sed [options] 'command' file
+Here are some common examples to illustrate how sed can be used:
+
+1. Substitute or Replace Text
+To replace the first occurrence of the string "apple" with "orange" in a file named fruits.txt:
+
+sed 's/apple/orange/' fruits.txt
+To replace all occurrences of "apple" with "orange" in the file:
+
+sed 's/apple/orange/g' fruits.txt
+
+2. Deleting Lines
+To delete the first line of a file:
+
+sed '1d' file.txt
+To delete all lines containing the word "apple":
+
+sed '/apple/d' fruits.txt
+
+3. Display Certain Lines
+To display only the first line of a file:
+
+sed -n '1p' file.txt
+To display lines containing the word "apple":
+
+sed -n '/apple/p' fruits.txt
+
+4. Insert or Append Text
+To insert "Hello World" before the 3rd line:
+
+sed '3iHello World' file.txt
+To append "Goodbye World" after the 3rd line:
+
+sed '3aGoodbye World' file.txt
+
+5. In-place Editing
+To replace "apple" with "orange" in fruits.txt and save the changes back to the file:
+
+sed -i 's/apple/orange/g' fruits.txt
+(Note: On macOS, you might need to provide an empty string with -i like -i '' for in-place editing without backup.)
+
+6. Line Numbering
+To add line numbers to each line of a file:
+
+sed = file.txt | sed 'N;s/\n/\t/'
+
+7. Complex Transformations
+Combining multiple sed commands can perform complex text transformations. For example, to replace "apple" with "orange" and then delete all lines containing "banana":
+
+sed -e 's/apple/orange/g' -e '/banana/d' fruits.txt

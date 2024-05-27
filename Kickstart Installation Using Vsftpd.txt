@@ -1,0 +1,42 @@
+Kickstart Installation Using Vsftpd
+====================================
+# yum install ftp vsftpd -y
+Edit the /etc/vsftpd/vsftpd.conf file
+Change listen=NO to listen=YES
+change listen_ipv6=YES to listen_ipv6=NO
+change anonymous_enable=NO to anonymous_enable=YES
+
+# systemctl start/enable/status vsftpd
+
+Next, cd into /etc/yum.repos.d/ to create a local repo file local.repo with the ftp address of your server your are configuring and the mount point that you have mounted your iso files to.
+
+
+name="Redhat AppStream"
+baseurl=ftp://192.168.1.214/repo/AppStream/
+enabled=1
+gpgcheck=0
+
+
+[BaseOS]
+name="Redhat BaseOS"
+baseurl=ftp://192.168.1.214/repo/BaseOS/
+enabled=1
+gpgcheck=0
+
+
+Next, cd into cd /root and copy the ananconda-ks.cfg file into the vsftpd shared location /var/ftp
+
+cd /root
+ls
+ananconda-ks.cfg
+cp anaconda-ks.cfg /var/ftp/
+
+Also, copy the contents of your iso file directory into /var/ftp. I mounted my iso files to /repo
+
+# ln -s /repo /var/ftp/
+
+how to use ansible to kickstart 10 new servers from a kickstart address file, exchange ssh keys with those servers, enable root remote login and trigger the kickstart process on each server using kickstart ftp file init.ks=ftp://192.168.1.192/pub/ks/ks.cfg --Walk me through every step 
+
+
+
+

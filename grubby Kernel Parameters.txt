@@ -1,0 +1,22 @@
+Viewing Current Kernel Parameters:
+
+#grubby --info=ALL
+
+Adding Kernel Parameters: To add a new parameter to the current kernel, you can use the --args option:
+
+#grubby --update-kernel=ALL --args="new_parameter=value"
+
+Removing Kernel Parameters:
+To remove a specific parameter from the current kernel, use the --remove-args option:
+
+#grubby --update-kernel=ALL --remove-args="parameter_to_remove"
+
+
+Changing the Default Kernel:
+You can set the default kernel that GRUB should boot using the --set-default option:
+
+#grubby --set-default=0
+
+
+
+

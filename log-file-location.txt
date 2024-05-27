@@ -1,0 +1,21 @@
+Messages: The /var/log/messages file contains general system messages, including kernel messages, system startup messages, and messages from various services.
+
+Secure: The /var/log/secure file contains authentication-related messages, such as login attempts, authentication failures, and sudo usage.
+
+Boot: The /var/log/boot.log file contains messages logged during the system boot process.
+
+Cron: The /var/log/cron file contains messages related to cron jobs and scheduled tasks.
+
+Journal (systemd): RHEL 9 uses systemd's journal for system logging. You can view the system journal using the journalctl command. By default, journal logs are stored in a binary format under the /var/log/journal directory.
+
+Yum/DNF: The /var/log/yum.log or /var/log/dnf.log file contains information about package installations, upgrades, and removals using the Yum or DNF package managers.
+
+Kernel: The /var/log/kern.log file contains kernel-related messages and errors.
+
+HTTP Server (Apache): If you have Apache HTTP Server installed, its log files are typically located in /var/log/httpd/.
+
+Mail (Postfix): If you have a mail server installed (e.g., Postfix), its log files may be located in /var/log/maillog.
+
+SSH (OpenSSH): If you have SSH server (OpenSSH) installed, its log files may be located in /var/log/secure or /var/log/auth.log.
+
+These are just a few examples of common log files in RHEL 9. The specific log files and their locations may vary depending on the services and applications installed on your system. You can use commands like ls, less, tail, or grep to view and search log files as needed. Additionally, you can configure logging settings and rotation policies using tools like rsyslog or systemd-journald.

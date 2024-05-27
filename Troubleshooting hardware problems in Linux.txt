@@ -1,0 +1,16 @@
+Quick-diagnosing devices, modules, and drivers
+The first step in troubleshooting usually is to display a list of the hardware installed on your Linux server
+-------------------------------------------
+
+ lspci, lsblk, lscpu, and lsscsi,  systemctl status 
+
+Digging into multiple loggings
+--------------------------------
+ dmesg | more --> allows you to figure out errors and warnings in the kernel's latest messages
+You can also look at all Linux system logs in the /var/log/messages file.
+ tail -f /var/log/messages command
+
+
+Analyzing networking functions
+-------------------------------
+Useful commands to figure out networking functions in the Linux server include ip addr, traceroute, nslookup, dig, and ping, among others. For example, here is the output of the ip addr show command:

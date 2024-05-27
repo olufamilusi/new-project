@@ -1,0 +1,9 @@
+Boot Process
+============
+Firmware phase--Bios initializes the system hardware and loads the MBR
+
+bootloader phase --the grub takes the kernel from /boot, decompresses it and place it in to the memory based configuration file /boot/grub2/grub.cfg which loads the kernel
+
+kernel phase --the kernel loads the required drivers and starts the first system process
+
+Initialization phase --system takes control of the kernel and enable all the services and then starts the runlevels

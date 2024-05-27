@@ -1,0 +1,38 @@
+#!/bin/bash
+
+###############################################
+# Author: Olumide
+# Date : 5th March, 2024
+#
+# Version: v1
+#
+#
+# This script will report AWS resource usage
+
+################################################
+
+# AWS S3
+# AWS EC2
+# AWS Lambda
+# AWS IAM Users
+
+# AWS CLI path
+AWS_CLI_PATH="/usr/local/bin/aws"
+
+set -x
+
+# list s3 buckets
+echo "Print list of s3 buckets"
+$AWS_CLI_PATH s3 ls
+
+# list EC2 Instances
+echo "Print list of ec2 buckets"
+$AWS_CLI_PATH ec2 describe-instances | jq '.Reservations[].Instances[].InstanceId'
+
+# list AWS Lambda
+echo "Print list of lambda functions"
+$AWS_CLI_PATH lambda list-functions
+
+# list IAM users
+echo "Print list of IAM Users"
+$AWS_CLI_PATH iam list-users
